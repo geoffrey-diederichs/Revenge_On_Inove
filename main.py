@@ -31,7 +31,7 @@ def info(screen):
 
 def main():
     pygame.init()
-    bg = pygame.image.load("C:/Users/alexa/Documents/ynov/fighting-game/img/maps/map1.png")
+    bg = pygame.image.load("C:/Users/alexa/Documents/ynov/fighting-game/img/maps/map1.png").convert_alpha()
     bg_size = bg.get_size()
     background_pos = pygame.Vector2(width / 2, height / 2)
     player_pos = pygame.Vector2(width / 2, height / 2)
@@ -54,13 +54,13 @@ def main():
 
         keys = pygame.key.get_pressed()
         if keys[pygame.K_LEFT]:
-            background_pos.x += 5
+            background_pos.x += 1
         if keys[pygame.K_RIGHT]:
-            background_pos.x -= 5
+            background_pos.x -= 1
         if keys[pygame.K_UP]:
-            background_pos.y += 5
+            background_pos.y += 1
         if keys[pygame.K_DOWN]:
-            background_pos.y -= 5
+            background_pos.y -= 1
 
         screen.blit(bg, background_pos)
         pygame.draw.circle(screen, "red", player_pos, 20)
