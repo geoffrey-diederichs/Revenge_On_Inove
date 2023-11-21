@@ -43,6 +43,31 @@ class Character:
     def remove_item(self, item:Item) -> None:
         if self.has_item(item) == 1:
             self._items.remove(item)
+    
+    def compute_damages(self, item:Item) -> int:
+        return self._attack + item._attack
+    
+    def take_damages(self, damages:int) -> None:
+        self._current_health -= damages
+        if self._current_health < 0:
+            self._current_health = 0
+
+    def inflict_damages(self, item:int, target:Character) -> int:
+        damages = self.compute_damages(self._items[item])
+        if damages < 0:
+            self.take_damages(-1*damages)
+        elif damages > 0:
+            target.take_damages(damages)
+        return damages
+
+    def formatted_attack_result(self, item:int, target:Character) -> str:
+        result = self.inflict_damages(item, target)
+        if result == 0:
+            return "Nothing happened"
+        if result > 0:
+            return f"{self._name} has {self._items[item]._attack_name} {target._name} for {result} damages."
+        if result < 0:
+            return f"{self._name} has {self._items[item]._attack_name} himself for {result} damages."
 
 if __name__ == "__main__":
     pass

@@ -3,28 +3,28 @@ from item import Item
 
 
 def main():
-    sword = Item("sword", "slash", "10")
+    fist = Item("fist", "punch", 0)
+
+    sword = Item("sword", "slash", 10)
     print(sword)
     
-    rope = Item("rope", "hang himself", "-500")
+    rope = Item("rope", "hang", -500)
     print(rope)
 
-    bottle = Item("bottle", "throw at head", "1")
+    bottle = Item("bottle", "throw at head", 1)
     print(bottle)
 
-    charac = Character("test", 50, 15, 10, [])
+    charac = Character("test", 50, 15, 10, [fist])
     print(charac, charac.list_items(), sep="\n")
     
-    charac2 = Character("test 2", 0, 0, 0, [sword, rope])
+    charac2 = Character("test 2", 1000, 0, 0, [fist, sword, rope])
     print(charac2, charac2.list_items(), sep="\n")
     
-    print(charac2.has_item(sword), charac2.has_item(bottle), charac.has_item(rope), sep="\n")
+    print(charac2.formatted_attack_result(2, charac))
+    print(charac2)
 
-    charac.add_item(rope)
-    print(charac.list_items(), charac.has_item(rope), sep="\n")
-    charac.remove_item(rope)
-    print(charac.has_item(rope), charac.list_items(), sep="\n")
-    
+    print(charac.formatted_attack_result(0, charac2))
+    print(charac2)
 
 if __name__ == "__main__":
     main()
