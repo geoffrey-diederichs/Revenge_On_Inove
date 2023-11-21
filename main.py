@@ -20,6 +20,15 @@ def dialogues(text_lines, screen):
         screen.blit(text_surface, text_rect)
         y_position += 50
 
+def info(screen):
+    pygame.font.init()
+    font = pygame.font.SysFont(None, 50)
+    text_info = "Press e to show dialogue, arrows to move"
+    text_surface = font.render(text_info, True, (255, 255, 255))
+    text_rect = (0, 0)
+    screen.blit(text_surface, text_rect)
+
+
 def main():
     pygame.init()
     bg = pygame.image.load("C:/Users/alexa/Documents/ynov/fighting-game/img/maps/map1.png")
@@ -56,7 +65,11 @@ def main():
         screen.blit(bg, background_pos)
         pygame.draw.circle(screen, "red", player_pos, 20)
         text = ["on va tester les dialogues", "oui"]
-        dialogues(text, screen)
+
+        if keys[pygame.K_e]:
+            dialogues(text, screen)
+
+        info(screen)
 
         pygame.display.flip()
 
