@@ -3,7 +3,7 @@ from item import Item
 
 
 class Character:
-    def __init__(self, name:str="bot", max_health:int=0, attack:int=0, defense:int=0, items:[Item]=[]) -> None:
+    def __init__(self, name:str, max_health:int=0, attack:int=0, defense:int=0, items:[Item]=[]) -> None:
         if max_health <= 0:
             max_health = 100
         if attack < 0:
@@ -18,8 +18,8 @@ class Character:
         self._items = items
     
     @classmethod
-    def create_character(cls) -> Character:
-        new_charac = Character()
+    def create_character(cls, name:int) -> Character:
+        new_charac = Character(name)
         new_charac._items.append(Item.create_item())
         return new_charac
 

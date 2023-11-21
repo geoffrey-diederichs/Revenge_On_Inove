@@ -14,7 +14,7 @@ def main():
     bottle = Item("bottle", "throw at head", 1)
     print(bottle)
     
-    charac = Character.create_character()
+    charac = Character.create_character("test")
     print(charac, charac.list_items(), sep="\n")
 
 if __name__ == "__main__":
