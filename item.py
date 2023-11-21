@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+
 class Item():
     def __init__(self, name:str, attack_name:str, attack:int):
         if len(name) <= 0:
