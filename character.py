@@ -31,5 +31,18 @@ class Character:
             result += f"\n - {i}"
         return result
 
+    def add_item(self, item:Item) -> None:
+        self._items.append(item)
+    
+    def has_item(self, item:Item) -> int:
+        for i in self._items:
+            if i == item:
+                return 1
+        return 0
+
+    def remove_item(self, item:Item) -> None:
+        if self.has_item(item) == 1:
+            self._items.remove(item)
+
 if __name__ == "__main__":
     pass
