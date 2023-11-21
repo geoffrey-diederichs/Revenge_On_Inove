@@ -37,4 +37,3 @@ while True:
     screen.blit(bg, background_pos)
     pygame.draw.circle(screen, "red", player_pos, 20)
     pygame.display.flip()
-
