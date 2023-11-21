@@ -3,21 +3,25 @@ from item import Item
 
 
 class Character:
-    def __init__(self, name:str, max_health:int, attack:int, defense:int, items:[Item]) -> None:
-        if len(name) <= 0:
-            name = "bot"
+    def __init__(self, name:str="bot", max_health:int=0, attack:int=0, defense:int=0, items:[Item]=[]) -> None:
         if max_health <= 0:
             max_health = 100
         if attack < 0:
-            attack = 10
+            attack = 0 
         if defense < 0:
-            defense = 10
+            defense = 0
         self._name = name
         self._max_health = max_health
         self._current_health = max_health
         self._attack = attack
         self._defense = defense
         self._items = items
+    
+    @classmethod
+    def create_character(cls) -> Character:
+        new_charac = Character()
+        new_charac._items.append(Item.create_item())
+        return new_charac
 
     def __str__(self) -> str:
         return f"{self._name}, {self._current_health}/{self._max_health}hp, {self._attack} attack, {self._defense} defense, {len(self._items)} items."
@@ -44,6 +48,9 @@ class Character:
         if self.has_item(item) == 1:
             self._items.remove(item)
     
+    def is_alive(self) -> None:
+        pass
+
     def compute_damages(self, item:Item) -> int:
         return self._attack + item._attack
     

@@ -11,5 +11,9 @@ class Item():
         self._attack_name = attack_name
         self._attack = attack
 
+    @classmethod
+    def create_item(cls) -> Item:
+        return Item("fist", "punch", 0)
+
     def __str__(self) -> str:
         return f"{self._name}, can {self._attack_name} with {self._attack} attack."
