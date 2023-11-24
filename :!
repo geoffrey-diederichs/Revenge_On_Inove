@@ -12,8 +12,8 @@ width = screen.get_width()
 
 #offset that moves the camera at the load of map
 offset = {
-    'x': width / 2,
-    'y': height / 2
+    'x': 0,
+    'y':0 
 }
 
 #size of each tile
@@ -35,7 +35,7 @@ FPS = 144
 
 #create instance of background class 
 background = Background()
-player_pos = pygame.Vector2(offset['x'], offset['y'])
+player_pos = pygame.Vector2(width/2, height/2)
     
 clock = pygame.time.Clock()
 
@@ -43,7 +43,10 @@ clock = pygame.time.Clock()
 for i in range(1, len(collisionsMap), 1):
     for j in range(0, 35, 1):
         if (collisionsMap[i][j] == 1):
-            Collision(j*tileSize*zoomMapLevel, i*tileSize*zoomMapLevel)
+            Collision(j*zoomMapLevel*tileSize, i*zoomMapLevel*tileSize)
+
+
+#Collision(0, 0)
 
 text = ["on va tester les dialogues", "oui"]
 #.convert_alpha() is very important, without it the game is much laggier
@@ -79,44 +82,82 @@ def info():
 
 def move():
     #keys event
+    moveX = 0
+    moveY = 0
+    global movable
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT]:
         for i in allCollisions:
-            check_collisions('left', i)
-            #print(player.position_x, player.position_y)
-        player.position_x -= 1
-        background.x += 1
-        for i in allCollisions:
-            i.x +=1
+            i.x += 1
+            if (check_collisions('left', i)):
+                movable = False
+            else:
+                movable = True
+        moveX = 1
+        
     if keys[pygame.K_RIGHT]:
-        player.position_x += 1
-        background.x -= 1
+        moveX = -1
         for i in allCollisions:
-            i.x -=1
+            i.x -= 1
+            if (check_collisions('right', i)):
+                movable = False
+            else:
+                movable = True
+
     if keys[pygame.K_UP]:
-        player.position_y -= 1
-        background.y += 1
+        moveY = 1
         for i in allCollisions:
-            i.y +=1
+            i.y += 1
+            if (check_collisions('up', i)):
+                movable = False
+            else:
+                movable = True
+
     if keys[pygame.K_DOWN]:
-        player.position_y += 1
-        background.y -= 1
+        moveY = -1
         for i in allCollisions:
-            i.y -=1
+            i.y -= 1
+            if (check_collisions('bottom', i)):
+                movable = False
+            else:
+                movable = True
+
     if keys[pygame.K_e]:
         dialogues(text)
+
+    if movable:
+        player.position_y += moveY*-1
+        player.position_x += moveX*-1
+        background.x += moveX
+        background.y += moveY
 
 def check_collisions(direction: str, collision: Collision):
     if direction == 'left':
         #print(player.position_x, player.position_y, collision.x, collision.y)
-        if (player.position_x - player.width <= collision.x + collision.size): #and
-            #player.position_x <= collision.x and
-            #player.position_y <= collision.y and
-            #player.position_y >= collision.y):
-            print("collision")
-        else:
-            print("pas collision")
-    return True 
+        if (player.position_x-3*tileSize <= collision.fixedX+collision.size and
+            player.position_x + player.width >= collision.fixedX and
+            player.position_y + player.height >= collision.fixedY and
+            player.position_y <= collision.fixedY + collision.size):
+            return True
+    elif direction == 'right':
+        if (player.position_x <= collision.fixedX+collision.size and
+            player.position_x + player.width+3*tileSize >= collision.fixedX and
+            player.position_y + player.height >= collision.fixedY and
+            player.position_y <= collision.fixedY + collision.size):
+            return True
+    elif direction == 'up':
+        if (player.position_x<= collision.fixedX+collision.size and
+            player.position_x + player.width >= collision.fixedX and
+            player.position_y + player.height>= collision.fixedY and
+            player.position_y -3*tileSize<= collision.fixedY + collision.size):
+            return True
+    elif direction == 'bottom':
+        if (player.position_x<= collision.fixedX+collision.size and
+            player.position_x + player.width >= collision.fixedX and
+            player.position_y + player.height +3*tileSize>= collision.fixedY and
+            player.position_y<= collision.fixedY + collision.size):
+            return True
+    return False 
 
 def main():
     while True:
@@ -137,7 +178,8 @@ def main():
 
         #draw every collision
         for i in allCollisions:
-            pygame.draw.circle(screen, "red", (i.x*4,i.y*4), 80)
+            #print(i.fixedX, i.fixedY, player.position_x, player.position_y)
+            pygame.draw.circle(screen, "red", (i.x,i.y), 16)
 
         #display info text
         info()
@@ -147,9 +189,6 @@ def main():
         #apply all the blit
         pygame.display.flip()
 
+movable = True
 player = Player(width/2, height/2)
-for i in allCollisions:
-    #print(i.x, i.y)
-    pass
-
 main()
