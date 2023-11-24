@@ -18,6 +18,13 @@ class Character:
         self._items = items
     
     @classmethod
+    def create(cls, name:str) -> Character:
+        match name:
+            case "student":
+                return Character.create_student()
+        return Character.create_student()
+
+    @classmethod
     def create_character(cls, name:int) -> Character:
         new_charac = Character(name, 100, 20, 10, [])
         new_charac._items.append(Item.create("fist"))

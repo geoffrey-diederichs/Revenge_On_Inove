@@ -6,7 +6,7 @@ def main():
     charac = Character.create_character("test")
     print(charac, charac.list_items(), sep="\n")
     
-    student1 = Character.create_student()
+    student1 = Character.create("student")
     print(student1, student1.list_items(), sep="\n")
     
     student1.remove_item("coffee")
