@@ -8,8 +8,20 @@ class Item():
         self._attack = attack
 
     @classmethod
-    def create_item(cls) -> Item:
-        return Item("fist", "punch", 0)
+    def create_fist(cls) -> Item:
+        return Item("fist", "punch", 1)
+
+    @classmethod
+    def create_coffee(cls) -> Item:
+        return Item("coffee", "throw boiling coffee", 3)
+
+    @classmethod
+    def create_sword(cls) -> Item:
+        return Item("sword", "slash", 5)
+
+    @classmethod
+    def create_rope(cls) -> Item:
+        return Item("rope", "hang himself", -500)
 
     def __str__(self) -> str:
         return f"{self._name}, can {self._attack_name} with {self._attack} attack."

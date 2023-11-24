@@ -3,7 +3,7 @@ from item import Item
 
 
 class Character:
-    def __init__(self, name:str, max_health:int=0, attack:int=0, defense:int=0, items:[Item]=[]) -> None:
+    def __init__(self, name:str, max_health:int, attack:int, defense:int, items:[Item]) -> None:
         if max_health <= 0:
             max_health = 100
         if attack < 0:
@@ -19,9 +19,16 @@ class Character:
     
     @classmethod
     def create_character(cls, name:int) -> Character:
-        new_charac = Character(name)
-        new_charac._items.append(Item.create_item())
+        new_charac = Character(name, 100, 20, 10, [])
+        new_charac._items.append(Item.create_fist())
         return new_charac
+
+    @classmethod
+    def create_student(cls) -> Character:
+        new_student = Character("Student", 30, 10, 10, [])
+        new_student._items.append(Item.create_fist())
+        new_student._items.append(Item.create_coffee())
+        return new_student
 
     def __str__(self) -> str:
         return f"{self._name}, {self._current_health}/{self._max_health}hp, {self._attack} attack, {self._defense} defense, {len(self._items)} items."
