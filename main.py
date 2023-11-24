@@ -12,8 +12,8 @@ width = screen.get_width()
 
 #offset that moves the camera at the load of map
 offset = {
-    'x': 0,
-    'y':0 
+    'x': height/2,
+    'y': width/2 
 }
 
 #size of each tile
@@ -28,25 +28,24 @@ collisionsMap = [int]
 
 
 #Make 1d to 2dArray
-for i in range(0, len(collisionsArray), 35):
-    collisionsMap.append(collisionsArray[0+i: 36+i])
+for i in range(0, len(collisionsArray), 150):
+    collisionsMap.append(collisionsArray[0+i: 151+i])
 
 FPS = 144
 
 #create instance of background class 
 background = Background()
+#background.x = offset['x']
+#background.y = offset['y']
 player_pos = pygame.Vector2(width/2, height/2)
     
 clock = pygame.time.Clock()
 
 #create instance of all collision
 for i in range(1, len(collisionsMap), 1):
-    for j in range(0, 35, 1):
-        if (collisionsMap[i][j] == 1):
-            Collision(j*zoomMapLevel*tileSize, i*zoomMapLevel*tileSize)
-
-
-#Collision(0, 0)
+    for j in range(0, 150, 1):
+        if (collisionsMap[i][j] == 126):
+            Collision(j*zoomMapLevel*tileSize+35, i*zoomMapLevel*tileSize-35)
 
 text = ["on va tester les dialogues", "oui"]
 #.convert_alpha() is very important, without it the game is much laggier
@@ -132,7 +131,6 @@ def move():
 
 def check_collisions(direction: str, collision: Collision):
     if direction == 'left':
-        #print(player.position_x, player.position_y, collision.x, collision.y)
         if (player.position_x-3*tileSize <= collision.fixedX+collision.size and
             player.position_x + player.width >= collision.fixedX and
             player.position_y + player.height >= collision.fixedY and
@@ -160,7 +158,7 @@ def check_collisions(direction: str, collision: Collision):
 
 def main():
     while True:
-        #re fill the whole screen therefore make it refresh each frame
+        #re fill the whole screen therefore makes it refresh each frame
         screen.fill('black')
         #limit frames by 144 atm
         clock.tick(FPS)
