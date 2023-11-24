@@ -23,7 +23,7 @@ class Item():
             case "shell":
                 return Item.create_shell()
             case "inexistent":
-                return Item.creat_inexistent()
+                return Item.create_inexistent()
         return Item.create_fist()
 
     @classmethod

@@ -18,21 +18,21 @@ class Character:
         self._items = items
     
     @classmethod
-    def create(cls, key:str, name:str="") -> Character:
+    def create(cls, key:str, name:str="", attack:int=0, defense:int=0) -> Character:
         match key:
             case "character":
-                return Character.create_character(name)
+                return Character.create_character(name, attack, defense)
             case "student":
                 return Character.create_student()
             case "mentor":
                 return Character.create_mentor()
             case "teacher":
-                return Character.creaté_teacher()
+                return Character.create_teacher()
         return Character.create_student()
 
     @classmethod
-    def create_character(cls, name:int) -> Character:
-        return Character(name, 100, 20, 10, [Item.create("fist")])
+    def create_character(cls, name:int, attack:int, defense:int) -> Character:
+        return Character(name, 100, attack, defense, [Item.create("fist")])
 
     @classmethod
     def create_student(cls) -> Character:
@@ -48,6 +48,12 @@ class Character:
 
     def __str__(self) -> str:
         return f"{self._name}, {self._current_health}/{self._max_health}hp, {self._attack} attack, {self._defense} defense, {len(self._items)} items."
+   
+    def get_name(self) -> str:
+        return self._name
+
+    def health(self) -> str:
+        return f"{self._current_health}/{self._max_health}hp"
 
     def list_items(self) -> str:
         nbr_items = len(self._items)
@@ -56,6 +62,13 @@ class Character:
         result = f"{self._name} has {nbr_items} items :"
         for i in self._items:
             result += f"\n - {i}"
+        return result
+    
+    def list_items_array(self) -> [str]:
+        result = []
+        for i in self._items:
+            print(i)
+            result.append(i._name)
         return result
     
     def has_item(self, item:str) -> int:
