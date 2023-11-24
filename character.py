@@ -81,6 +81,8 @@ class Character:
             self._current_health = 0
 
     def inflict_damages(self, item:str, target:Character) -> int:
+        if self.is_alive() == 0:
+            return 0
         damages = self.compute_damages(item)
         if damages < 0:
             self.take_damages(-1*damages)
