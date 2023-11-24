@@ -10,16 +10,16 @@ screen = pygame.display.set_mode((1920, 1080))
 height = screen.get_height()
 width = screen.get_width()
 
-#offset that moves the camera at the load of map
-offset = {
-    'x': height/2,
-    'y': width/2 
-}
-
 #size of each tile
 tileSize = 16
 #the zoomlevel exported from tiled
 zoomMapLevel = 4
+
+#offset that moves the camera at the load of map
+offset = {
+    'x': 50.5*tileSize*zoomMapLevel,
+    'y': 17*tileSize*zoomMapLevel
+}
 
 #1dArray with all collisions
 collisionsArray = collision()
@@ -35,8 +35,6 @@ FPS = 144
 
 #create instance of background class 
 background = Background()
-#background.x = offset['x']
-#background.y = offset['y']
 player_pos = pygame.Vector2(width/2, height/2)
     
 clock = pygame.time.Clock()
@@ -45,7 +43,7 @@ clock = pygame.time.Clock()
 for i in range(1, len(collisionsMap), 1):
     for j in range(0, 150, 1):
         if (collisionsMap[i][j] == 126):
-            Collision(j*zoomMapLevel*tileSize+35, i*zoomMapLevel*tileSize-35)
+            Collision((j+0.5)*zoomMapLevel*tileSize-offset['x'], (i-0.7)*zoomMapLevel*tileSize-offset['y'])
 
 text = ["on va tester les dialogues", "oui"]
 #.convert_alpha() is very important, without it the game is much laggier
@@ -161,14 +159,15 @@ def main():
                 exit()
 
         #fill the screen with background image at x, y
-        screen.blit(bg, (background.x, background.y))
+        screen.blit(bg, (background.x-offset['x'], background.y-offset['y']))
         #draw the player (just a red circle atm)
         pygame.draw.circle(screen, "green", player_pos, 20)
 
         #draw every collision
         for i in allCollisions:
             #print(i.fixedX, i.fixedY, player.position_x, player.position_y)
-            pygame.draw.circle(screen, "red", (i.x,i.y), 16)
+            #pygame.draw.circle(screen, "red", (i.x,i.y), 16)
+            pass
 
         #display info text
         info()
