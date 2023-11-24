@@ -20,19 +20,19 @@ class Character:
     @classmethod
     def create_character(cls, name:int) -> Character:
         new_charac = Character(name, 100, 20, 10, [])
-        new_charac._items.append(Item.create_fist())
+        new_charac._items.append(Item.create("fist"))
         return new_charac
 
     @classmethod
     def create_student(cls) -> Character:
         new_student = Character("Student", 30, 10, 10, [])
-        new_student._items.append(Item.create_fist())
-        new_student._items.append(Item.create_coffee())
+        new_student._items.append(Item.create("fist"))
+        new_student._items.append(Item.create("coffee"))
         return new_student
 
     def __str__(self) -> str:
         return f"{self._name}, {self._current_health}/{self._max_health}hp, {self._attack} attack, {self._defense} defense, {len(self._items)} items."
-    
+
     def list_items(self) -> str:
         nbr_items = len(self._items)
         if nbr_items == 0:
@@ -41,22 +41,26 @@ class Character:
         for i in self._items:
             result += f"\n - {i}"
         return result
-
-    def add_item(self, item:Item) -> None:
-        self._items.append(item)
     
-    def has_item(self, item:Item) -> int:
+    def has_item(self, item:str) -> int:
         for i in self._items:
-            if i == item:
-                return 1
+            if i._name == item:
+                return 1 
         return 0
 
-    def remove_item(self, item:Item) -> None:
-        if self.has_item(item) == 1:
-            self._items.remove(item)
+    def add_item(self, item:str) -> None:
+        if self.has_item(item) == 0:
+            self._items.append(Item.create(item))
     
-    def is_alive(self) -> None:
-        pass
+    def remove_item(self, item:str) -> None:
+        for i in self._items:
+            if i._name == item:
+                self._items.remove(i)
+
+    def is_alive(self) -> int:
+        if self._current_health > 0:
+            return 1
+        return 0
 
     def compute_damages(self, item:Item) -> int:
         return self._attack + item._attack

@@ -8,6 +8,19 @@ class Item():
         self._attack = attack
 
     @classmethod
+    def create(cls, item:str) -> Item:
+        match item:
+            case "fist":
+                return Item.create_fist()
+            case "coffee":
+                return Item.create_coffee()
+            case "sword":
+                return Item.create_sword()
+            case "rope":
+                return Item.create_rope()
+        return Item.create_fist()
+
+    @classmethod
     def create_fist(cls) -> Item:
         return Item("fist", "punch", 1)
 

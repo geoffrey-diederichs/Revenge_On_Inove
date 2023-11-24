@@ -8,6 +8,9 @@ def main():
     
     student1 = Character.create_student()
     print(student1, student1.list_items(), sep="\n")
+    
+    student1.remove_item("coffee")
+    print(student1.list_items())
 
 if __name__ == "__main__":
     main()
