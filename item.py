@@ -38,3 +38,6 @@ class Item():
 
     def __str__(self) -> str:
         return f"{self._name}, can {self._attack_name} with {self._attack} attack."
+
+if __name__ == "__main__":
+    pass

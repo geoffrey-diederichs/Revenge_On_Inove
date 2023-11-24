@@ -4,13 +4,17 @@ from item import Item
 
 def main():
     charac = Character.create_character("test")
-    print(charac, charac.list_items(), sep="\n")
-    
     student1 = Character.create("student")
-    print(student1, student1.list_items(), sep="\n")
+
+    print(student1.inflict_damages("coffee", charac))
     
-    student1.remove_item("coffee")
-    print(student1.list_items())
+    print(student1, charac, sep="\n")
+
+    charac.add_item("rope")
+    
+    print(charac.inflict_damages("rope", student1))
+
+    print(student1, charac, sep="\n")
 
 if __name__ == "__main__":
     main()
