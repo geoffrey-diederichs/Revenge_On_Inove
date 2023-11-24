@@ -3,8 +3,25 @@ from item import Item
 
 
 def fight(charac:Character, enemy:Character) -> int:
+    charac_items = charac.list_items_array()
+    enemy_items = enemy.list_items_array()
+
     print(charac, "vs", enemy, " ", sep="\n")
     while (charac.is_alive() == 1) and (enemy.is_alive() == 1):
+        print("You have :")
+        for i in charac_items:
+            print(" - ", i)
+        """
+        item = input("Choose an item to attack : ")
+        while True:
+            if item.isdigit == False:
+                item = input("Please give a number : ")
+            elif (int(item) < 1) or (int(item) > len(charac_items)):
+                item = input("Please give a valid numer")
+            else:
+                break
+        """
+
         charac.inflict_damages("fist", enemy)
         print(charac.get_name(), charac.health())
         print(enemy.get_name(), enemy.health(), "\n")

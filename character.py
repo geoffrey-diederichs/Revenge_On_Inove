@@ -91,11 +91,11 @@ class Character:
             return 1
         return 0
 
-    def compute_damages(self, item:str) -> int:
+    def compute_damages(self, item:str, target:Character) -> int:
         for i in self._items:
             if i._name == item:
-                return self._attack + i._attack
-        return self._attack
+                return self._attack + i._attack - target._defense
+        return self._attack - target._defense
     
     def take_damages(self, damages:int) -> None:
         self._current_health -= damages
@@ -105,7 +105,7 @@ class Character:
     def inflict_damages(self, item:str, target:Character) -> int:
         if self.is_alive() == 0:
             return 0
-        damages = self.compute_damages(item)
+        damages = self.compute_damages(item, target)
         if damages < 0:
             self.take_damages(-1*damages)
         elif damages > 0:
