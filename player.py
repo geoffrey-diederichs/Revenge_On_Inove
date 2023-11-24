@@ -4,4 +4,7 @@ class Player:
         self.position_y = y
         self.width = 16
         self.height = 16
-        self.imgSrc = 'kfevkfa'
+        self.imgSrc = 'img/player.png'
+        self.frameX = 0
+        self.frameY = 0
+        self.frameRate = 0

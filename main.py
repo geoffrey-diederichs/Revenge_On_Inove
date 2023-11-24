@@ -5,6 +5,7 @@ from collision import *
 from background import *
 
 pygame.init()
+pygame.display.set_caption("revenge on inove")
 
 screen = pygame.display.set_mode((1920, 1080))
 height = screen.get_height()
@@ -35,19 +36,20 @@ FPS = 144
 
 #create instance of background class 
 background = Background()
-player_pos = pygame.Vector2(width/2, height/2)
-    
-clock = pygame.time.Clock()
 
 #create instance of all collision
 for i in range(1, len(collisionsMap), 1):
     for j in range(0, 150, 1):
         if (collisionsMap[i][j] == 126):
-            Collision((j+0.5)*zoomMapLevel*tileSize-offset['x'], (i-0.7)*zoomMapLevel*tileSize-offset['y'])
+            Collision((j)*zoomMapLevel*tileSize-offset['x'], (i-1.3)*zoomMapLevel*tileSize-offset['y'])
 
 text = ["on va tester les dialogues", "oui"]
 #.convert_alpha() is very important, without it the game is much laggier
 bg = (pygame.image.load(background.imgSrc)).convert_alpha()
+player = Player(width/2, height/2)
+playerSprite = (pygame.image.load(player.imgSrc)).convert_alpha()
+playerSprite_rect = playerSprite.get_rect()
+playerSprite = pygame.transform.scale(playerSprite, (playerSprite_rect.width*zoomMapLevel, playerSprite_rect.height*zoomMapLevel))
 
 def dialogues(text_lines):
     pygame.font.init()
@@ -147,6 +149,7 @@ def check_collisions(direction: str, collision: Collision):
     return False 
 
 def main():
+    clock = pygame.time.Clock()
     while True:
         #re fill the whole screen therefore makes it refresh each frame
         screen.fill('black')
@@ -160,14 +163,24 @@ def main():
 
         #fill the screen with background image at x, y
         screen.blit(bg, (background.x-offset['x'], background.y-offset['y']))
+        screen.blit(playerSprite, (width/2, height/2), (player.frameX*zoomMapLevel, player.frameY, player.frameX+player.width*zoomMapLevel, 16*zoomMapLevel))
+        if player.frameRate == 50:
+            player.frameRate = 0
+            if player.frameX >= 32:
+                player.frameX = 0
+            else:
+                player.frameX += 16
+        else:
+            player.frameRate += 1
+
         #draw the player (just a red circle atm)
-        pygame.draw.circle(screen, "green", player_pos, 20)
+        #pygame.draw.circle(screen, "green", player_pos, 20)
 
         #draw every collision
-        for i in allCollisions:
+        #for i in allCollisions:
             #print(i.fixedX, i.fixedY, player.position_x, player.position_y)
             #pygame.draw.circle(screen, "red", (i.x,i.y), 16)
-            pass
+            #pass
 
         #display info text
         info()
@@ -178,5 +191,4 @@ def main():
         pygame.display.flip()
 
 movable = True
-player = Player(width/2, height/2)
 main()
