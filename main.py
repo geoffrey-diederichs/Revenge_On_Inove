@@ -51,22 +51,22 @@ bg = (pygame.image.load(background.imgSrc)).convert_alpha()
 
 def dialogues(text_lines):
     pygame.font.init()
-    font = pygame.font.SysFont(None, 65)
+    font = pygame.font.SysFont(None, 55)
 
     #draw the white outter line from dialogue
-    pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(width-width+300, height/2+200, width-590, height-760))
+    pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(width-width/1.17, height-height/3.2, width-width/3.4, height-height/1.3))
     #draw the black inner line
-    pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(width-width+315, height/2+215, width-620, height-790))
+    pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(width-width/1.178, height-height/3.31, width-width/3.26, height-height/1.265))
     #draw the character face
-    pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(width-width+345, height/2+240, width-width+225, 220))
+    pygame.draw.rect(screen, "green", pygame.Rect(width-width/1.19, height-height/3.44, width-width/1.1, height-height/1.2))
 
-    text_y_position = 770
+    text_y_position = width-width/1.67 
     #allow to have multiple lines of dialogue
     for line in text_lines:
         text_surface = font.render(line, True, (255, 255, 255))
-        text_rect = (1200 // 2, text_y_position)
+        text_rect = (width-width/1.35, text_y_position)
         screen.blit(text_surface, text_rect)
-        text_y_position += 50
+        text_y_position += width-width/1.02
 
 def info():
     #display all the info at the top of the screen
