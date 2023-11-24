@@ -18,24 +18,33 @@ class Character:
         self._items = items
     
     @classmethod
-    def create(cls, name:str) -> Character:
-        match name:
+    def create(cls, key:str, name:str="") -> Character:
+        match key:
+            case "character":
+                return Character.create_character(name)
             case "student":
                 return Character.create_student()
+            case "mentor":
+                return Character.create_mentor()
+            case "teacher":
+                return Character.creaté_teacher()
         return Character.create_student()
 
     @classmethod
     def create_character(cls, name:int) -> Character:
-        new_charac = Character(name, 100, 20, 10, [])
-        new_charac._items.append(Item.create("fist"))
-        return new_charac
+        return Character(name, 100, 20, 10, [Item.create("fist")])
 
     @classmethod
     def create_student(cls) -> Character:
-        new_student = Character("Student", 30, 10, 10, [])
-        new_student._items.append(Item.create("fist"))
-        new_student._items.append(Item.create("coffee"))
-        return new_student
+        return Character("Student", 30, 10, 10, [Item.create("fist"), Item.create("coffee")])
+
+    @classmethod
+    def create_mentor(cls) -> Character:
+        return Character("Mentor", 50, 20, 10, [Item.create("fist"), Item.create("wooclap")])
+
+    @classmethod
+    def create_teacher(cls) -> Character:
+        return Character("Teacher", 1000, 50, 20, [Item.create("inexistent")])
 
     def __str__(self) -> str:
         return f"{self._name}, {self._current_health}/{self._max_health}hp, {self._attack} attack, {self._defense} defense, {len(self._items)} items."

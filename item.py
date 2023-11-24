@@ -8,8 +8,8 @@ class Item():
         self._attack = attack
 
     @classmethod
-    def create(cls, item:str) -> Item:
-        match item:
+    def create(cls, key:str) -> Item:
+        match key:
             case "fist":
                 return Item.create_fist()
             case "coffee":
@@ -18,6 +18,12 @@ class Item():
                 return Item.create_sword()
             case "rope":
                 return Item.create_rope()
+            case "wooclap":
+                return Item.create_wooclap()
+            case "shell":
+                return Item.create_shell()
+            case "inexistent":
+                return Item.creat_inexistent()
         return Item.create_fist()
 
     @classmethod
@@ -35,6 +41,18 @@ class Item():
     @classmethod
     def create_rope(cls) -> Item:
         return Item("rope", "hang himself", -500)
+    
+    @classmethod
+    def create_wooclap(lcs) -> Item:
+        return Item("wooclap", "make you answer a QCM", 10)
+
+    @classmethod
+    def create_shell(cls) -> Item:
+        return Item("shell", "walk around with your shell open", 10)
+    
+    @classmethod
+    def create_inexistent(cls) -> Item:
+        return Item("inexistent", "not exist since there is no teacher at Inove", -1000)
 
     def __str__(self) -> str:
         return f"{self._name}, can {self._attack_name} with {self._attack} attack."
