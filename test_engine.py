@@ -81,37 +81,8 @@ def main():
     charac.add_item("shell")
 
     print("\nROUND 3\n")
+    if fight(charac, teacher) == 0:
+        exit()
     
-    charac_items = charac.list_items_array()
-
-    print(charac, "vs", teacher, " ", sep="\n")
-    print("You have :")
-    for i in charac_items:
-        print(" - ", i)
-        
-    item = input("Choose an item to attack : ")
-    while True:
-        if item.isdigit() == False:
-            item = input("Please give a number : ")
-        elif (int(item) < 1) or (int(item) > len(charac_items)):                item = input("Please give a valid number : ")
-        else:
-            break
-    damages = charac.inflict_damages(charac_items[int(item)-1], teacher)
-        
-    if damages > 1:
-        print("You inflicted ", damages, " damages")
-    elif damages == 1:
-        print("You inflicted 1 damage")
-    elif damages == 0:
-        print("Nothing happened")
-    elif damages < 0:
-        print("He countered and inflicted you ", damages, "damages", "\n")
-    print(charac.get_name(), " : ", charac.health())
-    print(teacher.get_name(), " : ", teacher.health(), "\n")
-
-    print("Teacher attacks you with not existing since there is no teachers at Inove", "\nHe takes -1000 damages\n")
-
-    print("YOU WON !")
-
 if __name__ == "__main__":
     main()

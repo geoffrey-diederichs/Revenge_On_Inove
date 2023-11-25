@@ -44,7 +44,7 @@ class Character:
 
     @classmethod
     def create_teacher(cls) -> Character:
-        return Character("Teacher", 1000, 50, 20, [Item.create("inexistent")])
+        return Character("Teacher", 1000, 50, 100, [Item.create("inexistent")])
 
     def __str__(self) -> str:
         return f"{self._name}, {self._current_health}/{self._max_health}hp, {self._attack} attack, {self._defense} defense, {len(self._items)} items."

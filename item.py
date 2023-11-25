@@ -48,7 +48,7 @@ class Item():
 
     @classmethod
     def create_shell(cls) -> Item:
-        return Item("shell", "walk around with your shell open", 10)
+        return Item("shell", "walk around with your shell open", 200)
     
     @classmethod
     def create_inexistent(cls) -> Item:
