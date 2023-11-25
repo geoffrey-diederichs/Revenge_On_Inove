@@ -164,14 +164,8 @@ def main():
         #fill the screen with background image at x, y
         screen.blit(bg, (background.x-offset['x'], background.y-offset['y']))
         screen.blit(playerSprite, (width/2, height/2), (player.frameX*zoomMapLevel, player.frameY, player.frameX+player.width*zoomMapLevel, 16*zoomMapLevel))
-        if player.frameRate == 50:
-            player.frameRate = 0
-            if player.frameX >= 32:
-                player.frameX = 0
-            else:
-                player.frameX += 16
-        else:
-            player.frameRate += 1
+
+        player.animate()
 
         #draw the player (just a red circle atm)
         #pygame.draw.circle(screen, "green", player_pos, 20)

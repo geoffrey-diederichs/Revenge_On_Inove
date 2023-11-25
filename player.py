@@ -8,3 +8,13 @@ class Player:
         self.frameX = 0
         self.frameY = 0
         self.frameRate = 0
+
+    def animate(self):
+        if self.frameRate == 50:
+            self.frameRate = 0
+            if self.frameX >= 32:
+                self.frameX = 0
+            else:
+                self.frameX += 16
+        else:
+            self.frameRate += 1
