@@ -52,7 +52,7 @@ class Item():
     
     @classmethod
     def create_inexistent(cls) -> Item:
-        return Item("inexistent", "not exist since there is no teacher at Inove", -1000)
+        return Item("inexistent", "not exist since there is no teachers at Inove", -1000)
 
     def __str__(self) -> str:
         return f"{self._name}, can {self._attack_name} with {self._attack} attack."

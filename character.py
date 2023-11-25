@@ -67,7 +67,6 @@ class Character:
     def list_items_array(self) -> [str]:
         result = []
         for i in self._items:
-            print(i)
             result.append(i._name)
         return result
     
