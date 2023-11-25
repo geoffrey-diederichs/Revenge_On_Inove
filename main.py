@@ -82,32 +82,57 @@ def info():
 def move():
     moveX = 0
     moveY = 0
+    global pressed_l
+    global pressed_r
+    global pressed_u
+    global pressed_d
     global movable
+    global last_key
     movable = True
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT]:
+        player.frameX = 6*16
+        last_key = 'left'
+        pressed_l = True
         moveX = 1
         for i in allCollisions:
             if (check_collisions('left', i)):
                 movable = False
+    else:
+        pressed_l = False
         
     if keys[pygame.K_RIGHT]:
+        player.frameX = 2*16
+        last_key = 'right'
+        pressed_r = True
         moveX = -1
         for i in allCollisions:
             if (check_collisions('right', i)):
                 movable = False
+    else:
+        pressed_r = False
 
     if keys[pygame.K_UP]:
+        player.frameX = 0*16
+        last_key = 'up'
+        pressed_u = True
         moveY = 1
         for i in allCollisions:
             if (check_collisions('up', i)):
                 movable = False
+    else:
+        pressed_u = False
 
     if keys[pygame.K_DOWN]:
+        player.frameX = 4*16
+        last_key = 'down'
+        pressed_d = True
         moveY = -1
         for i in allCollisions:
             if (check_collisions('bottom', i)):
                 movable = False
+    else:
+        pressed_d = False
 
     if keys[pygame.K_e]:
         dialogues(text)
@@ -161,12 +186,22 @@ def main():
             if event.type == pygame.QUIT:
                 exit()
 
+
+        if last_key == 'left':
+            if pressed_d:
+                player.animate(pressed_l, pressed_d)
+            else:
+                player.animate(pressed_l)
+        elif last_key == 'right':
+            player.animate(pressed_r)
+        elif last_key == 'up':
+            player.animate(pressed_u)
+        elif last_key == 'down':
+            player.animate(pressed_d)
+
         #fill the screen with background image at x, y
         screen.blit(bg, (background.x-offset['x'], background.y-offset['y']))
-        screen.blit(playerSprite, (width/2, height/2), (player.frameX*zoomMapLevel, player.frameY, player.frameX+player.width*zoomMapLevel, 16*zoomMapLevel))
-
-        player.animate()
-
+        screen.blit(playerSprite, (width/2, height/2), (player.frameX*zoomMapLevel, player.frameY*zoomMapLevel, player.width*zoomMapLevel, player.height*zoomMapLevel))
         #draw the player (just a red circle atm)
         #pygame.draw.circle(screen, "green", player_pos, 20)
 
@@ -185,4 +220,10 @@ def main():
         pygame.display.flip()
 
 movable = True
+last_key = ""
+before_last_key = ""
+pressed_l = False
+pressed_r = False
+pressed_u = False
+pressed_d = False
 main()

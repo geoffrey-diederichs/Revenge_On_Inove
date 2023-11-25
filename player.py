@@ -3,18 +3,23 @@ class Player:
         self.position_x = x
         self.position_y = y
         self.width = 16
-        self.height = 16
+        self.height = 24
         self.imgSrc = 'img/player.png'
-        self.frameX = 0
-        self.frameY = 0
+        self.frameX = 64
+        self.frameY = 24*2
         self.frameRate = 0
+        self.framesX = 8-1
+        self.framesY = 2
 
-    def animate(self):
-        if self.frameRate == 50:
-            self.frameRate = 0
-            if self.frameX >= 32:
-                self.frameX = 0
+    def animate(self, pressed: bool, pressed2: bool = False):
+        if pressed:
+            if self.frameRate == 60:
+                self.frameRate = 0
+                if self.frameY >= self.height*self.framesY:
+                    self.frameY = 24
+                else:
+                    self.frameY += self.height*2
             else:
-                self.frameX += 16
+                self.frameRate += 1
         else:
-            self.frameRate += 1
+            self.frameY = 24*2
