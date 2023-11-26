@@ -1,5 +1,5 @@
 class Player:
-    def __init__(self, x: int, y:int):
+    def __init__(self, x: int, y:int, char: int = 1):
         self.position_x = x
         self.position_y = y
         self.width = 16
@@ -10,8 +10,10 @@ class Player:
         self.frameRate = 0
         self.framesX = 8-1
         self.framesY = 2
+        #1=robot, 2=girl, 3=boi
+        self.char = 1
 
-    def animate(self, pressed: bool, pressed2: bool = False):
+    def animate(self, pressed: bool):
         if pressed:
             if self.frameRate == 60:
                 self.frameRate = 0
