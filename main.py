@@ -56,18 +56,22 @@ def dialogues(text_lines):
     font = pygame.font.SysFont(None, 55)
 
     #draw the white outter line from dialogue
-    pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(width-width/1.17, height-height/3.2, width-width/3.4, height-height/1.3))
+    #pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(width-width/1.17, height-height/3.2, width-width/3.4, height-height/1.3))
     #draw the black inner line
-    pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(width-width/1.178, height-height/3.31, width-width/3.26, height-height/1.265))
+    #pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(width-width/1.178, height-height/3.31, width-width/3.26, height-height/1.265))
     #draw the character face
-    pygame.draw.rect(screen, "green", pygame.Rect(width-width/1.19, height-height/3.44, width-width/1.1, height-height/1.2))
+    #pygame.draw.rect(screen, "green", pygame.Rect(width-width/1.19, height-height/3.44, width-width/1.1, height-height/1.2))
 
+    
+    #pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(0, height-height/3.2, width, height))
+    rect = pygame.Surface((width, height), pygame.SRCALPHA)
+    rect.fill((0, 0, 0, 110))
     text_y_position = width-width/1.67 
     #allow to have multiple lines of dialogue
     for line in text_lines:
-        text_surface = font.render(line, True, (255, 255, 255))
-        text_rect = (width-width/1.35, text_y_position)
-        screen.blit(text_surface, text_rect)
+        text_surface = font.render(line, True, ("green"))
+        text_rect = (30, text_y_position)
+        screen.blit(rect, text_rect)
         text_y_position += width-width/1.02
 
 def info():
@@ -216,11 +220,18 @@ def main():
         info()
         #get inputs and move the char
         move()
+        #info_box()
 
         #apply all the blit
         pygame.display.flip()
 
+def info_box():
+    pygame.draw.rect(screen, "reredd", pygame.Rect(width-width/1.19, height-height/3.44, width-width/1.1, height-height/1.2))
+
+
 movable = True
+
+
 last_key = ""
 before_last_key = ""
 pressed_l = False
