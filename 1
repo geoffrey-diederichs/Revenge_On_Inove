@@ -87,10 +87,8 @@ def move():
     global pressed_u
     global pressed_d
     global movable
-    global before_last_key
     global last_key
     movable = True
-    tmp_key = last_key
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT]:
         last_key = 'left'
@@ -144,9 +142,6 @@ def move():
             i.y += moveY
             i.x += moveX 
 
-    if (tmp_key != last_key):
-        before_last_key = tmp_key 
-
 def check_collisions(direction: str, collision: Collision):
     if direction == 'left':
         if (player.position_x-3*tileSize <= collision.fixedX+collision.size and
@@ -177,7 +172,7 @@ def check_collisions(direction: str, collision: Collision):
 def main():
     clock = pygame.time.Clock()
     while True:
-        #re fill the whole screen therefore makes it refresh every frame
+        #re fill the whole screen therefore makes it refresh each frame
         screen.fill('black')
         #limit frames by 144 atm
         clock.tick(FPS)
@@ -187,18 +182,19 @@ def main():
             if event.type == pygame.QUIT:
                 exit()
 
-        if last_key == 'left':
+
+        if pressed_l:
             player.frameX = 6*16
             player.animate(pressed_l)
-        if last_key == 'right':
+        if pressed_r:
             player.frameX = 2*16
             player.animate(pressed_r)
-        if last_key == 'up':
+        if pressed_u:
             player.frameX = 0*16
             player.animate(pressed_u)
-        if last_key == 'down':
+        if pressed_b:
             player.frameX = 4*16
-            player.animate(pressed_d)
+            player.animate(pressed_b)
 
         #fill the screen with background image at x, y
         screen.blit(bg, (background.x-offset['x'], background.y-offset['y']))
