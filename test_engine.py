@@ -1,5 +1,6 @@
 from character import Character
 from item import Item
+import random
 
 
 def fight(charac:Character, enemy:Character) -> int:
@@ -23,14 +24,27 @@ def fight(charac:Character, enemy:Character) -> int:
         damages = charac.inflict_damages(charac_items[int(item)-1], enemy)
         
         if damages > 1:
-            print("You inflicted ", damages, " damages")
+            print("You inflicted", damages, "damages")
         elif damages == 1:
             print("You inflicted 1 damage")
         elif damages == 0:
             print("Nothing happened")
         elif damages < 0:
-            print("He countered and inflicted you ", damages, "damages", "\n")
-    
+            print("He countered and inflicted you", damages, "damages")
+        
+        randNbr = random.randint(0, len(enemy_items)-1)
+        damages = enemy.inflict_damages(enemy_items[randNbr], charac)
+
+        if damages > 1:
+            print("He inflicted you", damages, "damages")
+        elif damages == 1:
+            print("He inflicted you 1 damage")
+        elif damages == 0:
+            print("Nothing happened")
+        else:
+            print("You countered him and inflicted", damages, "damages")
+       
+        print()
         print(charac.get_name(), " : ", charac.health())
         print(enemy.get_name(), " : ", enemy.health(), "\n")
 
@@ -51,16 +65,6 @@ def main():
 
     print("Create your character")
     name = input("Name : ")
-    """
-    attack = input("Attack : ")
-    while attack.isdigit() == False:
-        attack = input("Attack (a number please) : ")
-    defense = input("Defense : ")
-    while defense.isdigit() == False:
-        defense = input("Defense (a number please) : ")
-    attack = int(attack)
-    defense = int(defense)
-    """
     attack = 25
     defense = 15
     charac = Character.create("character", name, attack, defense)
