@@ -21,14 +21,15 @@ background = Background()
 
 FPS = 144
 
-text = ["on va tester les dialogues", "oui"]
+#text = ["on va tester les dialogues", "oui"]
+text = "on va tester les dialogues\nnon?\nC'est quand meme mieux comme ca\nIl faudra peut etre changer la font aussi"
 
 player = Player(width/2, height/2)
 playerSprite = (pygame.image.load(player.imgSrc)).convert_alpha()
 playerSprite_rect = playerSprite.get_rect()
 playerSprite = pygame.transform.scale(playerSprite, (playerSprite_rect.width*zoomMapLevel, playerSprite_rect.height*zoomMapLevel))
 
-def dialogues(text_lines):
+def dialogues(text):
     pygame.font.init()
     font = pygame.font.SysFont(None, 55)
 
@@ -40,8 +41,11 @@ def dialogues(text_lines):
     pygame.draw.rect(screen, "green", pygame.Rect(width-width/1.19, height-height/3.44, width-width/1.1, height-height/1.2))
 
     text_y_position = width-width/1.67 
+
+    text_arr = text.split("\n")
+
     #allow to have multiple lines of dialogue
-    for line in text_lines:
+    for line in text_arr:
         text_surface = font.render(line, True, (255, 255, 255))
         text_rect = (width-width/1.35, text_y_position)
         screen.blit(text_surface, text_rect)
