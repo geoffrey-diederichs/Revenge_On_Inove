@@ -1,5 +1,5 @@
 from __future__ import annotations
-from item import Item
+import item
 
 
 class Character:
@@ -119,6 +119,60 @@ class Character:
             return f"{self._name} has {self._items[item]._attack_name} {target._name} for {result} damages."
         if result < 0:
             return f"{self._name} has {self._items[item]._attack_name} himself for {result} damages."
+
+class Main_charac(Character):
+    def __init__(self, name:str) -> Character:
+        super().__init__(name, 100, 15, 15, [item.Fist()])
+        self._level = 0
+        self._key = [0, 0, 0]
+    
+    def up_level(self) -> None:
+        self._level += 1
+
+    def check_key(self, key:int) -> int:
+        if (key < 4) or (key > 0):
+            return self._key[key-1]
+        return -1
+
+    def add_key(self, key:int) -> None:
+        if (key < 4) or (key > 0):
+            self._key[key-1] = 1
+
+class Student(Character):
+    def __init__(self) -> Character:
+        super().__init__("student", 50, 5, 10, [item.Fist()])
+
+class Depressed_student(Character):
+    def __init__(self) -> Character:
+        super().__init__("depressed student", 50, 10, 10, [item.Coffee()])
+
+class School_referent(Character):
+    def __init__(self) -> Character:
+        super().__init__("school referent", 100, 50, 10, [item.Trello()])
+
+class Mentor(Character):
+    def __init__(self) -> Character:
+        super().__init__("mentor", 50, 20, 15, [item.Wooclap()])
+
+class Teacher(Character):
+    def __init__(self) -> Character:
+        super().__init__("teacher", 100, 1000, 15, [item.Inexistent()])
+
+class Director(Character):
+    def __init__(self) -> Character:
+        super().__init__("director", 100, 50, 20, [item.Fist(), item.Wooclap(), item.Google()])
+
+class Mentor2(Character):
+    def __init__(self) -> Character:
+        super().__init__("mentor 2", 100, 25, 25, [item.Wooclap(), item.Trello()])
+
+class Mentor3(Character):
+    def __init__(self) -> Character:
+        super.__init__("mentor 3", 100, 25, 25, [item.Wooclap(), item.Trello(), item.Shell()])
+
+class Network_teacher(Character):
+    def __init__(self) -> Character:
+        super.__init__("network teacher", 200, 50, 50, [item.Shell(), item.Arch(), item.Windaube()])
 
 if __name__ == "__main__":
     pass
