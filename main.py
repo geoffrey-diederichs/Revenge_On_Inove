@@ -209,21 +209,19 @@ def load_map(imgSrc):
 
 
     if background.current_floor == 0:
-        collisionsArray = collision_floor0()
         background.offset = {
             'x': 55.5*tileSize*zoomMapLevel,
             'y': 50*tileSize*zoomMapLevel
         }
+        collisionsArray = collision_floor0()
     elif background.current_floor == 1:
-        collisionsArray = collision_floor1()
         background.offset = {
-            'x': 20*tileSize*zoomMapLevel,
-            'y': 20*tileSize*zoomMapLevel
+            'x': 90.5*tileSize*zoomMapLevel,
+            'y': 56*tileSize*zoomMapLevel
         }
+        collisionsArray = collision_floor1()
     else:
         collisionsArray = []
-
-    #print(collisionsArray)
 
 
     #2dArray witl all collisions
