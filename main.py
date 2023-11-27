@@ -135,6 +135,9 @@ def move():
     if keys[pygame.K_e]:
         dialogues(text)
 
+    if keys[pygame.K_TAB]:
+        move_floor()
+
     if movable:
         player.position_y -= moveY
         player.position_x -= moveX
@@ -218,8 +221,44 @@ def main():
         move()
 
         #apply all the blit
+        #move_floor()
         pygame.display.flip()
 
+def move_floor():
+    global floor_select
+
+    texts = [
+    ["Choisir un étage:", "   > 1", "      2", "      3"],
+    ["Choisir un étage:", "      1", "   > 2", "      3"],
+    ["Choisir un étage:", "      1", "    2", "  > 3"]
+    ]
+
+    movable = False
+    text = texts[floor_select]
+    keys2 = pygame.key.get_pressed()
+    if keys2[pygame.K_DOWN] and floor_select == 0:
+        floor_select=1 
+    elif keys2[pygame.K_DOWN] and floor_select == 1:
+        floor_select=2
+
+    text_y_position = width-width/1.28 
+    pygame.font.init()
+    font = pygame.font.SysFont(None, 45)
+    pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(width-width/2.95, height-height/1.58, width-width/1.218, height-height/1.22))
+    pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(width-width/3, height-height/1.6, width-width/1.2, height-height/1.194))
+    
+    for line in text:
+        text_surface = font.render(line, True, (255, 255, 255))
+        text_rect = (width-width/3.1, text_y_position)
+        screen.blit(text_surface, text_rect)
+        text_y_position += width-width/1.02
+
+        
+    pygame.display.flip()
+
+
+floor_select = 0
+change = True
 movable = True
 last_key = ""
 before_last_key = ""
