@@ -134,7 +134,8 @@ def move():
 
     if keys[pygame.K_e]:
         dialogues(text)
-        load_map()
+    if keys[pygame.K_TAB]:
+        floor_selection()
 
     if movable:
         player.position_y -= moveY
@@ -222,11 +223,50 @@ def main():
         #apply all the blit
         pygame.display.flip()
 
-def load_map(to_floor: int):
+def load_map(imgSrc):
     global bg
     global current_floor
-    background.imgSrc = imgSrc
+    background.imgSrc = imgSrc 
     bg = (pygame.image.load(background.imgSrc)).convert_alpha()
+
+def floor_selection():
+    keys2 = pygame.key.get_pressed()
+    if background.current_floor == 0:
+        text = ["Quel étage ?", "     > RDC", "        1", "        2"]
+        if keys2[pygame.K_1]:
+            load_map("img/floor1.png")
+            background.current_floor = 1
+        elif keys2[pygame.K_2]:
+            load_map("img/floor2.png")
+            background.current_floor = 2
+    elif background.current_floor == 1:
+        text = ["Quel étage ?", "        RDC", "     > 1", "        2"]
+        if keys2[pygame.K_0]:
+            load_map("img/floor0.png")
+            background.current_floor = 0
+        elif keys2[pygame.K_2]:
+            load_map("img/floor2.png")
+            background.current_floor = 2
+    elif background.current_floor == 2:
+        text = ["Quel étage ?", "        RDC", "        1", "     > 2"]
+        if keys2[pygame.K_0]:
+            load_map("img/floor0.png")
+            background.current_floor = 0
+        elif keys2[pygame.K_2]:
+            load_map("img/floor2.png")
+            background.current_floor = 2
+
+    text_y_position = width-width/1.28
+    pygame.font.init()
+    font = pygame.font.SysFont(None, 45)
+    pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(width-width/2.95, height-height/1.58, width-width/1.218, height-height/1.22))
+    pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(width-width/3, height-height/1.6, width-width/1.2, height-height/1.194))
+
+    for line in text:
+        text_surface = font.render(line, True, (255, 255, 255))
+        text_rect = (width-width/3.1, text_y_position)
+        screen.blit(text_surface, text_rect)
+        text_y_position += width-width/1.02
 
 movable = True
 last_key = ""
@@ -235,5 +275,4 @@ pressed_l = False
 pressed_r = False
 pressed_u = False
 pressed_d = False
-current_floor = 0
 main()
