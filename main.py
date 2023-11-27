@@ -36,6 +36,7 @@ FPS = 144
 
 #create instance of background class 
 background = Background()
+bg = (pygame.image.load(background.imgSrc)).convert_alpha()
 
 #create instance of all collision
 for i in range(1, len(collisionsMap), 1):
@@ -45,7 +46,6 @@ for i in range(1, len(collisionsMap), 1):
 
 text = ["on va tester les dialogues", "oui"]
 #.convert_alpha() is very important, without it the game is much laggier
-bg = (pygame.image.load(background.imgSrc)).convert_alpha()
 player = Player(width/2, height/2)
 playerSprite = (pygame.image.load(player.imgSrc)).convert_alpha()
 playerSprite_rect = playerSprite.get_rect()
@@ -134,6 +134,7 @@ def move():
 
     if keys[pygame.K_e]:
         dialogues(text)
+        load_map()
 
     if movable:
         player.position_y -= moveY
@@ -177,6 +178,7 @@ def check_collisions(direction: str, collision: Collision):
 def main():
     clock = pygame.time.Clock()
     while True:
+        #load_map()
         #re fill the whole screen therefore makes it refresh every frame
         screen.fill('black')
         #limit frames by 144 atm
@@ -220,6 +222,12 @@ def main():
         #apply all the blit
         pygame.display.flip()
 
+def load_map(to_floor: int):
+    global bg
+    global current_floor
+    background.imgSrc = imgSrc
+    bg = (pygame.image.load(background.imgSrc)).convert_alpha()
+
 movable = True
 last_key = ""
 before_last_key = ""
@@ -227,4 +235,5 @@ pressed_l = False
 pressed_r = False
 pressed_u = False
 pressed_d = False
+current_floor = 0
 main()
