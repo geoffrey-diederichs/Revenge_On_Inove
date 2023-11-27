@@ -1,6 +1,6 @@
 import pygame
 from player import Player
-from collisionsMap import collision
+from collisionsMap import * 
 from collision import * 
 from background import *
 
@@ -15,34 +15,10 @@ width = screen.get_width()
 tileSize = 16
 #the zoomlevel exported from tiled
 zoomMapLevel = 4
-
-#offset that moves the camera at the load of map
-offset = {
-    'x': 50.5*tileSize*zoomMapLevel,
-    'y': 17*tileSize*zoomMapLevel
-}
-
-#1dArray with all collisions
-collisionsArray = collision()
-#2dArray witl all collisions
-collisionsMap = [int]
-
-
-#Make 1d to 2dArray
-for i in range(0, len(collisionsArray), 150):
-    collisionsMap.append(collisionsArray[0+i: 151+i])
+bg = ""
+background = Background()
 
 FPS = 144
-
-#create instance of background class 
-background = Background()
-bg = (pygame.image.load(background.imgSrc)).convert_alpha()
-
-#create instance of all collision
-for i in range(1, len(collisionsMap), 1):
-    for j in range(0, 150, 1):
-        if (collisionsMap[i][j] == 126):
-            Collision((j)*zoomMapLevel*tileSize-offset['x'], (i-1.3)*zoomMapLevel*tileSize-offset['y'])
 
 text = ["on va tester les dialogues", "oui"]
 #.convert_alpha() is very important, without it the game is much laggier
@@ -178,6 +154,7 @@ def check_collisions(direction: str, collision: Collision):
 
 def main():
     clock = pygame.time.Clock()
+    load_map("img/floor0.png")
     while True:
         #load_map()
         #re fill the whole screen therefore makes it refresh every frame
@@ -204,7 +181,7 @@ def main():
             player.animate(pressed_d)
 
         #fill the screen with background image at x, y
-        screen.blit(bg, (background.x-offset['x'], background.y-offset['y']))
+        screen.blit(bg, (background.x-background.offset['x'], background.y-background.offset['y']))
         screen.blit(playerSprite, (width/2, height/2), (player.frameX*zoomMapLevel, player.frameY*zoomMapLevel, player.width*zoomMapLevel, player.height*zoomMapLevel))
         #draw the player (just a red circle atm)
         #pygame.draw.circle(screen, "green", player_pos, 20)
@@ -225,9 +202,38 @@ def main():
 
 def load_map(imgSrc):
     global bg
-    global current_floor
+
     background.imgSrc = imgSrc 
     bg = (pygame.image.load(background.imgSrc)).convert_alpha()
+
+    if background.current_floor == 0:
+        collisionsArray = collision_floor0()
+        background.offset = {
+            'x': 55.5*tileSize*zoomMapLevel,
+            'y': 50*tileSize*zoomMapLevel
+        }
+    elif background.current_floor == 1:
+        collisionsArray = collision_floor1()
+        background.offset = {
+            'x': 0*tileSize*zoomMapLevel,
+            'y': 10*tileSize*zoomMapLevel
+        }
+    else:
+        collisionsArray = []
+
+
+    #2dArray witl all collisions
+    collisionsMap = [int]
+
+    #Make 1d to 2dArray
+    for i in range(0, len(collisionsArray), 150):
+        collisionsMap.append(collisionsArray[0+i: 151+i])
+
+    #create instance of all collision
+    for i in range(1, len(collisionsMap), 1):
+        for j in range(0, 150, 1):
+            if (collisionsMap[i][j] == 126):
+                Collision((j)*zoomMapLevel*tileSize-background.offset['x'], (i-1.3)*zoomMapLevel*tileSize-background.offset['y'])
 
 def floor_selection():
     keys2 = pygame.key.get_pressed()

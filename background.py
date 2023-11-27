@@ -4,4 +4,5 @@ class Background:
         self.y = 0
         self.imgSrc = "./img/floor0.png"
         self.current_floor = 0
+        self.offSet = {'x': 0, 'y': 0}
 
