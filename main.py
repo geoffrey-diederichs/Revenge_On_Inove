@@ -68,6 +68,20 @@ def move():
     global last_key
     movable = True
     tmp_key = last_key
+
+    if last_key == 'left':
+        player.frameX = 6*16
+        player.animate(pressed_l)
+    if last_key == 'right':
+        player.frameX = 2*16
+        player.animate(pressed_r)
+    if last_key == 'up':
+        player.frameX = 0*16
+        player.animate(pressed_u)
+    if last_key == 'down':
+        player.frameX = 4*16
+        player.animate(pressed_d)
+
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT]:
         last_key = 'left'
@@ -167,19 +181,6 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 exit()
-
-        if last_key == 'left':
-            player.frameX = 6*16
-            player.animate(pressed_l)
-        if last_key == 'right':
-            player.frameX = 2*16
-            player.animate(pressed_r)
-        if last_key == 'up':
-            player.frameX = 0*16
-            player.animate(pressed_u)
-        if last_key == 'down':
-            player.frameX = 4*16
-            player.animate(pressed_d)
 
         #fill the screen with background image at x, y
         screen.blit(bg, (background.x-background.offset['x'], background.y-background.offset['y']))
