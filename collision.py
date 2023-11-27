@@ -1,4 +1,5 @@
 class Collision:
+    allCollisions = []
     def __init__(self, x, y):
         self.x = x
         self.y = y
@@ -6,6 +7,5 @@ class Collision:
         #fixed are var that will stay at the original pos on the other hand, x and y will move to match the background movements
         self.fixedX = x
         self.fixedY = y
-        allCollisions.append(self)
+        Collision.allCollisions.append(self)
         
-allCollisions = []

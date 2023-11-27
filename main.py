@@ -1,4 +1,5 @@
 import pygame
+import gc
 from player import Player
 from collisionsMap import * 
 from collision import * 
@@ -21,7 +22,7 @@ background = Background()
 FPS = 144
 
 text = ["on va tester les dialogues", "oui"]
-#.convert_alpha() is very important, without it the game is much laggier
+
 player = Player(width/2, height/2)
 playerSprite = (pygame.image.load(player.imgSrc)).convert_alpha()
 playerSprite_rect = playerSprite.get_rect()
@@ -72,7 +73,7 @@ def move():
         last_key = 'left'
         pressed_l = True
         moveX = 1
-        for i in allCollisions:
+        for i in Collision.allCollisions:
             if (check_collisions('left', i)):
                 movable = False
     else:
@@ -82,7 +83,7 @@ def move():
         last_key = 'right'
         pressed_r = True
         moveX = -1
-        for i in allCollisions:
+        for i in Collision.allCollisions:
             if (check_collisions('right', i)):
                 movable = False
     else:
@@ -92,7 +93,7 @@ def move():
         last_key = 'up'
         pressed_u = True
         moveY = 1
-        for i in allCollisions:
+        for i in Collision.allCollisions:
             if (check_collisions('up', i)):
                 movable = False
     else:
@@ -102,7 +103,7 @@ def move():
         last_key = 'down'
         pressed_d = True
         moveY = -1
-        for i in allCollisions:
+        for i in Collision.allCollisions:
             if (check_collisions('bottom', i)):
                 movable = False
     else:
@@ -118,7 +119,7 @@ def move():
         player.position_x -= moveX
         background.x += moveX
         background.y += moveY
-        for i in allCollisions:
+        for i in Collision.allCollisions:
             i.y += moveY
             i.x += moveX 
 
@@ -127,26 +128,26 @@ def move():
 
 def check_collisions(direction: str, collision: Collision):
     if direction == 'left':
-        if (player.position_x-3*tileSize <= collision.fixedX+collision.size and
+        if (player.position_x-4*tileSize <= collision.fixedX+collision.size and
             player.position_x + player.width >= collision.fixedX and
-            player.position_y + player.height + 20 >= collision.fixedY and
-            player.position_y - 20 <= collision.fixedY + collision.size):
+            player.position_y + player.height + 2.3*tileSize >= collision.fixedY and
+            player.position_y - 2.3*tileSize<= collision.fixedY + collision.size):
             return True
     elif direction == 'right':
         if (player.position_x <= collision.fixedX+collision.size and
-            player.position_x + player.width+3*tileSize >= collision.fixedX and
-            player.position_y + player.height + 20 >= collision.fixedY and
-            player.position_y - 20 <= collision.fixedY + collision.size):
+            player.position_x + player.width+4*tileSize >= collision.fixedX and
+            player.position_y + player.height + 2.3*tileSize >= collision.fixedY and
+            player.position_y - 2.3*tileSize <= collision.fixedY + collision.size):
             return True
     elif direction == 'up':
-        if (player.position_x - 20 <= collision.fixedX+collision.size and
-            player.position_x + player.width + 20 >= collision.fixedX and
+        if (player.position_x - 3.5*tileSize <= collision.fixedX+collision.size and
+            player.position_x + player.width + 3.5*tileSize >= collision.fixedX and
             player.position_y + player.height>= collision.fixedY and
             player.position_y -3*tileSize<= collision.fixedY + collision.size):
             return True
     elif direction == 'bottom':
-        if (player.position_x - 20 <= collision.fixedX+collision.size and
-            player.position_x + player.width + 20 >= collision.fixedX and
+        if (player.position_x - 3.5*tileSize <= collision.fixedX+collision.size and
+            player.position_x + player.width + 3.5*tileSize >= collision.fixedX and
             player.position_y + player.height +3*tileSize>= collision.fixedY and
             player.position_y<= collision.fixedY + collision.size):
             return True
@@ -187,10 +188,9 @@ def main():
         #pygame.draw.circle(screen, "green", player_pos, 20)
 
         #draw every collision
-        #for i in allCollisions:
+        #for i in Collision.allCollisions:
             #print(i.fixedX, i.fixedY, player.position_x, player.position_y)
             #pygame.draw.circle(screen, "red", (i.x,i.y), 16)
-            #pass
 
         #display info text
         info()
@@ -206,6 +206,7 @@ def load_map(imgSrc):
     background.imgSrc = imgSrc 
     bg = (pygame.image.load(background.imgSrc)).convert_alpha()
 
+
     if background.current_floor == 0:
         collisionsArray = collision_floor0()
         background.offset = {
@@ -215,11 +216,13 @@ def load_map(imgSrc):
     elif background.current_floor == 1:
         collisionsArray = collision_floor1()
         background.offset = {
-            'x': 0*tileSize*zoomMapLevel,
-            'y': 10*tileSize*zoomMapLevel
+            'x': 20*tileSize*zoomMapLevel,
+            'y': 20*tileSize*zoomMapLevel
         }
     else:
         collisionsArray = []
+
+    #print(collisionsArray)
 
 
     #2dArray witl all collisions
@@ -228,6 +231,8 @@ def load_map(imgSrc):
     #Make 1d to 2dArray
     for i in range(0, len(collisionsArray), 150):
         collisionsMap.append(collisionsArray[0+i: 151+i])
+
+    del Collision.allCollisions[:]
 
     #create instance of all collision
     for i in range(1, len(collisionsMap), 1):
@@ -240,27 +245,26 @@ def floor_selection():
     if background.current_floor == 0:
         text = ["Quel étage ?", "     > RDC", "        1", "        2"]
         if keys2[pygame.K_1]:
-            load_map("img/floor1.png")
             background.current_floor = 1
+            load_map("img/floor1.png")
         elif keys2[pygame.K_2]:
-            load_map("img/floor2.png")
             background.current_floor = 2
+            load_map("img/floor2.png")
     elif background.current_floor == 1:
         text = ["Quel étage ?", "        RDC", "     > 1", "        2"]
         if keys2[pygame.K_0]:
-            load_map("img/floor0.png")
             background.current_floor = 0
+            load_map("img/floor0.png")
         elif keys2[pygame.K_2]:
-            load_map("img/floor2.png")
             background.current_floor = 2
+            load_map("img/floor2.png")
     elif background.current_floor == 2:
         text = ["Quel étage ?", "        RDC", "        1", "     > 2"]
         if keys2[pygame.K_0]:
-            load_map("img/floor0.png")
             background.current_floor = 0
+            load_map("img/floor0.png")
         elif keys2[pygame.K_2]:
             load_map("img/floor2.png")
-            background.current_floor = 2
 
     text_y_position = width-width/1.28
     pygame.font.init()
