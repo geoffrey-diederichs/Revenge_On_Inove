@@ -1,5 +1,6 @@
 import pygame
 import gc
+import time
 from player import Player
 from collisionsMap import * 
 from collision import * 
@@ -41,14 +42,20 @@ def dialogues(text):
     pygame.draw.rect(screen, "green", pygame.Rect(width-width/1.19, height-height/3.44, width-width/1.1, height-height/1.2))
 
     text_y_position = width-width/1.67 
+    text_x_position = width-width/1.4 
 
     text_arr = text.split("\n")
 
     #allow to have multiple lines of dialogue
     for line in text_arr:
-        text_surface = font.render(line, True, (255, 255, 255))
-        text_rect = (width-width/1.35, text_y_position)
-        screen.blit(text_surface, text_rect)
+        for char in line:
+            text_surface = font.render(char, True, (255, 255, 255))
+            text_rect = (text_x_position, text_y_position)
+            time.sleep(0.02)
+            screen.blit(text_surface, text_rect)
+            pygame.display.flip()
+            text_x_position+= width-width/1.01
+        text_x_position = width-width/1.5
         text_y_position += width-width/1.02
 
 def info():
