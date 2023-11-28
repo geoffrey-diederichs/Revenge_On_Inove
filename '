@@ -23,7 +23,7 @@ background = Background()
 FPS = 144
 
 #text = ["on va tester les dialogues", "oui"]
-text = "on va tester les dialogues\nnon?\nC'est quand meme mieux comme ca\nIl faudra peut etre changer la font aussi\ndeux lignes de plus\npour voir\nencore\nENCORE\nENCORE\nPLUS DE TEXT\nENCOR\nencore\nENCORE\nENCORE\nPLUS DE TEXT\nENCOR\nencore\nENCORE\nENCORE\nPLUS DE TEXT\nENCOREEE\nPARRRRRRRRRRRRFAIT"
+text = "on va tester les dialogues\nnon?\nC'est quand meme mieux comme ca\nIl faudra peut etre changer la font aussi\ndeux lignes de plus\npour voir"
 
 player = Player(width/2, height/2)
 playerSprite = (pygame.image.load(player.imgSrc)).convert_alpha()
@@ -40,10 +40,10 @@ def dialogues(text):
     #draw the black inner line
     pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(width-width/1.178, height-height/3.31, width-width/3.26, height-height/1.265))
     #draw the character face
-    pygame.draw.rect(screen, "green", pygame.Rect(width-width/1.19, height-height/3.44, width-width/1.1, height-height/1.2))
+    #pygame.draw.rect(screen, "green", pygame.Rect(width-width/1.19, height-height/3.44, width-width/1.1, height-height/1.2))
 
     text_y_position = width-width/1.67 
-    text_x_position = width-width/1.4 
+    text_x_position = width-width/1.2 
 
     text_arr = text.split("\n")
 
@@ -52,18 +52,18 @@ def dialogues(text):
     for line in text_arr:
         for char in line:
             if i == 4:
+                #screen.fill("black")
                 pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(width-width/1.178, height-height/3.31, width-width/3.26, height-height/1.265))
-                pygame.draw.rect(screen, "green", pygame.Rect(width-width/1.19, height-height/3.44, width-width/1.1, height-height/1.2))
                 text_y_position = width-width/1.67
                 i = 0
             text_surface = font.render(char, True, (255, 255, 255))
             text_rect = (text_x_position, text_y_position)
-            time.sleep(0.05)
+            time.sleep(0.02)
             screen.blit(text_surface, text_rect)
             pygame.display.flip()
             text_x_position+= width-width/1.014
         i += 1
-        text_x_position = width-width/1.4
+        text_x_position = width-width/1.2
         text_y_position += width-width/1.02
     time.sleep(2)
 
