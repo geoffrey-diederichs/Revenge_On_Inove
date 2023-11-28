@@ -208,8 +208,10 @@ def main():
         info()
         #get inputs and move the char
         move()
-
+        #print(player.position_x, player.position_y)
         #apply all the blit
+        if player.position_x > -144 and player.position_x < 21 and player.position_y < -230 and player.position_y  > -324:
+            floor_selection()
         pygame.display.flip()
 
 def load_map(imgSrc):
@@ -218,7 +220,7 @@ def load_map(imgSrc):
     background.imgSrc = imgSrc 
     bg = (pygame.image.load(background.imgSrc)).convert_alpha()
 
-
+ 
     if background.current_floor == 0:
         background.offset = {
             'x': 55.5*tileSize*zoomMapLevel,
