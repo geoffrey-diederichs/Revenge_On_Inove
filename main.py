@@ -23,8 +23,7 @@ background = Background()
 FPS = 144
 
 #text = ["on va tester les dialogues", "oui"]
-text = "on va tester les dialogues\nnon?\nC'est quand meme mieux comme ca\nIl faudra peut etre changer la font aussi\ndeux lignes de plus\npour voir\nencore\nENCORE\nENCORE\nPLUS DE TEXT\nENCOR\nencore\nENCORE\nENCORE\nPLUS DE TEXT\nENCOR\nencore\nENCORE\nENCORE\nPLUS DE TEXT\nENCOREEE\nPARRRRRRRRRRRRFAIT"
-
+text = "BIG RATIO, A QUOI IL SERT\nOUI VRAIMENT NAWAK\nLE MATIN LE SOIR\nRATIO RATIO\nRATIO A TOI\npareil mais en miniscule"
 player = Player(width/2, height/2)
 playerSprite = (pygame.image.load(player.imgSrc)).convert_alpha()
 playerSprite_rect = playerSprite.get_rect()
@@ -33,17 +32,17 @@ playerSprite = pygame.transform.scale(playerSprite, (playerSprite_rect.width*zoo
 def dialogues(text):
     global screen
     pygame.font.init()
-    font = pygame.font.SysFont(None, 55)
+    font = pygame.font.Font("./font/DeterminationMono.ttf", 40)
 
     #draw the white outter line from dialogue
     pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(width-width/1.17, height-height/3.2, width-width/3.4, height-height/1.3))
     #draw the black inner line
     pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(width-width/1.178, height-height/3.31, width-width/3.26, height-height/1.265))
     #draw the character face
-    pygame.draw.rect(screen, "green", pygame.Rect(width-width/1.19, height-height/3.44, width-width/1.1, height-height/1.2))
+    #pygame.draw.rect(screen, "green", pygame.Rect(width-width/1.19, height-height/3.44, width-width/1.1, height-height/1.2))
 
     text_y_position = width-width/1.67 
-    text_x_position = width-width/1.4 
+    text_x_position = width-width/1.2
 
     text_arr = text.split("\n")
 
@@ -51,9 +50,9 @@ def dialogues(text):
     i = 0
     for line in text_arr:
         for char in line:
-            if i == 4:
+            if i == 5:
                 pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(width-width/1.178, height-height/3.31, width-width/3.26, height-height/1.265))
-                pygame.draw.rect(screen, "green", pygame.Rect(width-width/1.19, height-height/3.44, width-width/1.1, height-height/1.2))
+                #pygame.draw.rect(screen, "green", pygame.Rect(width-width/1.19, height-height/3.44, width-width/1.1, height-height/1.2))
                 text_y_position = width-width/1.67
                 i = 0
             text_surface = font.render(char, True, (255, 255, 255))
@@ -63,14 +62,14 @@ def dialogues(text):
             pygame.display.flip()
             text_x_position+= width-width/1.014
         i += 1
-        text_x_position = width-width/1.4
+        text_x_position = width-width/1.2
         text_y_position += width-width/1.02
     time.sleep(2)
 
 def info():
     #display all the info at the top of the screen
     pygame.font.init()
-    font = pygame.font.SysFont(None, 50)
+    font = pygame.font.SysFont("./font/RubikMonoOne-Regular.ttf", 50)
     text_info = "Press e to show dialogue, arrows to move"
     text_surface = font.render(text_info, True, (255, 255, 255))
     text_rect = (0, 0)
@@ -143,7 +142,7 @@ def move():
     else:
         pressed_d = False
 
-    if keys[pygame.K_e]:
+    if keys[pygame.K_v]:
         dialogues(text)
     if keys[pygame.K_TAB]:
         floor_selection()
@@ -220,7 +219,13 @@ def main():
         #print(player.position_x, player.position_y)
         #apply all the blit
         if player.position_x > -144 and player.position_x < 21 and player.position_y < -230 and player.position_y  > -324:
-            floor_selection()
+            keys2 = pygame.key.get_pressed()
+            if keys2[pygame.K_e]:
+                near_escalator = True
+            if near_escalator == True: 
+                floor_selection()
+        else:
+            near_escalator = False
         pygame.display.flip()
 
 def load_map(imgSrc):
@@ -289,7 +294,7 @@ def floor_selection():
 
     text_y_position = width-width/1.28
     pygame.font.init()
-    font = pygame.font.SysFont(None, 45)
+    font = pygame.font.SysFont("./font/RubikMonoOne-Regular.ttf", 45)
     pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(width-width/2.95, height-height/1.58, width-width/1.218, height-height/1.22))
     pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(width-width/3, height-height/1.6, width-width/1.2, height-height/1.194))
 
