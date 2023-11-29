@@ -32,9 +32,6 @@ playerSprite_rect = playerSprite.get_rect()
 playerSprite = pygame.transform.scale(playerSprite, (playerSprite_rect.width*zoomMapLevel, playerSprite_rect.height*zoomMapLevel))
 
 def dialogues(text: str):
-    global screen
-    global font
-
     #draw the white outter line from dialogue
     pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(width-width/1.17, height-height/3.2, width-width/3.4, height-height/1.3))
     #draw the black inner line
@@ -68,7 +65,6 @@ def dialogues(text: str):
     time.sleep(2)
 
 def info():
-    global font
     #display all the info at the top of the screen
     text_info = "Press e to show dialogue, arrows to move"
     text_surface = font.render(text_info, True, (255, 255, 255))
@@ -208,7 +204,6 @@ def main():
 
         #fill the screen with background image at x, y
         screen.blit(bg, (background.x-background.offset['x'], background.y-background.offset['y']))
-        screen.blit(playerSprite, (width/2, height/2), (player.frameX*zoomMapLevel, player.frameY*zoomMapLevel, player.width*zoomMapLevel, player.height*zoomMapLevel))
         #draw the player (just a red circle atm)
         #pygame.draw.circle(screen, "green", player_pos, 20)
 
@@ -234,6 +229,11 @@ def main():
                 floor_selection()
         else:
             near_escalator = False
+
+        screen.blit(playerSprite, (width/2, height/2), (player.frameX*zoomMapLevel, player.frameY*zoomMapLevel, player.width*zoomMapLevel, player.height*zoomMapLevel))
+
+        if selection:
+            skin_selection()
         pygame.display.flip()
 
 def load_map(imgSrc: str):
@@ -311,6 +311,24 @@ def floor_selection():
         screen.blit(text_surface, text_rect)
         text_y_position += width-width/1.02
 
+def skin_selection():
+    global selection
+    screen.fill('black')
+    text_surface = font.render("selection", True, (255, 255, 255))
+    text_rect = (width-width/1.2, height-height/1.5)
+    screen.blit(text_surface, text_rect)
+    keys = pygame.key.get_pressed()
+    if keys[pygame.K_1]:
+        player.char = 1
+        selection = False
+    elif keys[pygame.K_2]:
+        player.char = 2
+        selection = False
+    elif keys[pygame.K_3]:
+        player.char = 3
+        selection = False
+
+selection = True
 movable = True
 last_key = ""
 before_last_key = ""

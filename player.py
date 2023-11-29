@@ -6,11 +6,10 @@ class Player:
         self.height = 24
         self.imgSrc = 'img/player.png'
         self.frameX = 64
-        self.frameY = 24*2
+        self.frameY = 0
         self.frameRate = 0
         self.framesX = 8-1
         self.framesY = 2
-        #1=robot, 2=girl, 3=boi
         self.char = 1
         self.sprint = 0
         self.totalFrames = 60
@@ -23,14 +22,21 @@ class Player:
             if self.frameRate > 30:
                 self.frameRate = 0
 
+        if self.char == 1:
+            self.charFrame = 24
+        elif self.char == 2:
+            self.charFrame = 24*5
+        elif self.char == 3:
+            self.charFrame = 24*9
+
         if pressed:
             if self.frameRate == self.totalFrames:
                 self.frameRate = 0
                 if self.frameY >= self.height*self.framesY:
-                    self.frameY = 24
+                    self.frameY = self.charFrame
                 else:
                     self.frameY += self.height*2
             else:
                 self.frameRate += 1
         else:
-            self.frameY = 24*2
+            self.frameY = self.charFrame+self.height
