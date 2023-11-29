@@ -50,7 +50,6 @@ def dialogues(text: str):
         for char in line:
             if i == 5:
                 pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(width-width/1.178, height-height/3.31, width-width/3.26, height-height/1.265))
-                #pygame.draw.rect(screen, "green", pygame.Rect(width-width/1.19, height-height/3.44, width-width/1.1, height-height/1.2))
                 text_y_position = width-width/1.67
                 i = 0
             text_surface = font.render(char, True, (255, 255, 255))
@@ -216,12 +215,13 @@ def main():
         #display info text
         info()
         #get inputs and move the char
+        screen.blit(playerSprite, (width/2, height/2), (player.frameX*zoomMapLevel, player.frameY*zoomMapLevel, player.width*zoomMapLevel, player.height*zoomMapLevel))
         move()
         #print(player.position_x, player.position_y)
         #apply all the blit
         if player.position_x > -144 and player.position_x < 21 and player.position_y < -230 and player.position_y  > -324:
-            text_surface = font.render("[e]", True,"black") 
-            text_rect = (width/2, height/2+height-height/0.98)
+            text_surface = font.render("[e]", True,"yellow") 
+            text_rect = (width/2-player.width/2, height/2+height-height/0.98)
             screen.blit(text_surface, text_rect)
             keys2 = pygame.key.get_pressed()
             if keys2[pygame.K_e]:
@@ -231,7 +231,6 @@ def main():
         else:
             near_escalator = False
 
-        screen.blit(playerSprite, (width/2, height/2), (player.frameX*zoomMapLevel, player.frameY*zoomMapLevel, player.width*zoomMapLevel, player.height*zoomMapLevel))
         if selection:
             skin_selection()
 
