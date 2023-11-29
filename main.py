@@ -224,7 +224,7 @@ def main():
         #print(player.position_x, player.position_y)
         #apply all the blit
         if player.position_x > -144 and player.position_x < 21 and player.position_y < -230 and player.position_y  > -324:
-            text_surface = font.render("[e]", True, (255, 255, 255))
+            text_surface = font.render("[e]", True,"black") 
             text_rect = (width/2, height/2+height-height/0.98)
             screen.blit(text_surface, text_rect)
             keys2 = pygame.key.get_pressed()
