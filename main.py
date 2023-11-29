@@ -7,6 +7,8 @@ from collision import *
 from background import *
 
 pygame.init()
+pygame.font.init()
+font = pygame.font.Font("./font/DeterminationMono.ttf", 45)
 pygame.display.set_caption("revenge on inove")
 
 screen = pygame.display.set_mode((1920, 1080))
@@ -29,10 +31,9 @@ playerSprite = (pygame.image.load(player.imgSrc)).convert_alpha()
 playerSprite_rect = playerSprite.get_rect()
 playerSprite = pygame.transform.scale(playerSprite, (playerSprite_rect.width*zoomMapLevel, playerSprite_rect.height*zoomMapLevel))
 
-def dialogues(text):
+def dialogues(text: str):
     global screen
-    pygame.font.init()
-    font = pygame.font.Font("./font/DeterminationMono.ttf", 40)
+    global font
 
     #draw the white outter line from dialogue
     pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(width-width/1.17, height-height/3.2, width-width/3.4, height-height/1.3))
@@ -67,9 +68,8 @@ def dialogues(text):
     time.sleep(2)
 
 def info():
+    global font
     #display all the info at the top of the screen
-    pygame.font.init()
-    font = pygame.font.SysFont("./font/RubikMonoOne-Regular.ttf", 50)
     text_info = "Press e to show dialogue, arrows to move"
     text_surface = font.render(text_info, True, (255, 255, 255))
     text_rect = (0, 0)
@@ -219,6 +219,9 @@ def main():
         #print(player.position_x, player.position_y)
         #apply all the blit
         if player.position_x > -144 and player.position_x < 21 and player.position_y < -230 and player.position_y  > -324:
+            text_surface = font.render("[e]", True, (255, 255, 255))
+            text_rect = (width/2, height/2+height-height/0.98)
+            screen.blit(text_surface, text_rect)
             keys2 = pygame.key.get_pressed()
             if keys2[pygame.K_e]:
                 near_escalator = True
@@ -228,7 +231,7 @@ def main():
             near_escalator = False
         pygame.display.flip()
 
-def load_map(imgSrc):
+def load_map(imgSrc: str):
     global bg
 
     background.imgSrc = imgSrc 
@@ -267,9 +270,10 @@ def load_map(imgSrc):
                 Collision((j)*zoomMapLevel*tileSize-background.offset['x'], (i-1.3)*zoomMapLevel*tileSize-background.offset['y'])
 
 def floor_selection():
+    global font
     keys2 = pygame.key.get_pressed()
     if background.current_floor == 0:
-        text = ["Quel étage ?", "     > RDC", "        1", "        2"]
+        text = ["Quel étage ?", "   > RDC", "     1", "     2"]
         if keys2[pygame.K_1]:
             background.current_floor = 1
             load_map("img/floor1.png")
@@ -277,7 +281,7 @@ def floor_selection():
             background.current_floor = 2
             load_map("img/floor2.png")
     elif background.current_floor == 1:
-        text = ["Quel étage ?", "        RDC", "     > 1", "        2"]
+        text = ["Quel étage ?", "     RDC", "   > 1", "     2"]
         if keys2[pygame.K_0]:
             background.current_floor = 0
             load_map("img/floor0.png")
@@ -293,8 +297,6 @@ def floor_selection():
             load_map("img/floor2.png")
 
     text_y_position = width-width/1.28
-    pygame.font.init()
-    font = pygame.font.SysFont("./font/RubikMonoOne-Regular.ttf", 45)
     pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(width-width/2.95, height-height/1.58, width-width/1.218, height-height/1.22))
     pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(width-width/3, height-height/1.6, width-width/1.2, height-height/1.194))
 
