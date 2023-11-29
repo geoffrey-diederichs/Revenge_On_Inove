@@ -105,7 +105,7 @@ def move():
     if keys[pygame.K_LEFT]:
         last_key = 'left'
         pressed_l = True
-        moveX = 1
+        moveX = 1+player.sprint
         for i in Collision.allCollisions:
             if (check_collisions('left', i)):
                 movable = False
@@ -115,7 +115,7 @@ def move():
     if keys[pygame.K_RIGHT]:
         last_key = 'right'
         pressed_r = True
-        moveX = -1
+        moveX = -1-player.sprint
         for i in Collision.allCollisions:
             if (check_collisions('right', i)):
                 movable = False
@@ -125,7 +125,7 @@ def move():
     if keys[pygame.K_UP]:
         last_key = 'up'
         pressed_u = True
-        moveY = 1
+        moveY = 1+player.sprint
         for i in Collision.allCollisions:
             if (check_collisions('up', i)):
                 movable = False
@@ -135,7 +135,7 @@ def move():
     if keys[pygame.K_DOWN]:
         last_key = 'down'
         pressed_d = True
-        moveY = -1
+        moveY = -1-player.sprint
         for i in Collision.allCollisions:
             if (check_collisions('bottom', i)):
                 movable = False
@@ -158,6 +158,11 @@ def move():
 
     if (tmp_key != last_key):
         before_last_key = tmp_key 
+
+    if keys[pygame.K_SPACE]:
+        player.sprint = 0.5
+    else:
+        player.sprint = 0
 
 def check_collisions(direction: str, collision: Collision):
     if direction == 'left':

@@ -12,10 +12,19 @@ class Player:
         self.framesY = 2
         #1=robot, 2=girl, 3=boi
         self.char = 1
+        self.sprint = 0
+        self.totalFrames = 60
 
     def animate(self, pressed: bool):
+        if self.sprint == 0:
+            self.totalFrames = 60
+        elif self.sprint != 0:
+            self.totalFrames = 30
+            if self.frameRate > 30:
+                self.frameRate = 0
+
         if pressed:
-            if self.frameRate == 60:
+            if self.frameRate == self.totalFrames:
                 self.frameRate = 0
                 if self.frameY >= self.height*self.framesY:
                     self.frameY = 24
