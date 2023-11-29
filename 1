@@ -190,7 +190,6 @@ def check_collisions(direction: str, collision: Collision):
 def main():
     clock = pygame.time.Clock()
     load_map("img/floor0.png")
-
     while True:
         #load_map()
         #re fill the whole screen therefore makes it refresh every frame
@@ -232,9 +231,9 @@ def main():
             near_escalator = False
 
         screen.blit(playerSprite, (width/2, height/2), (player.frameX*zoomMapLevel, player.frameY*zoomMapLevel, player.width*zoomMapLevel, player.height*zoomMapLevel))
+
         if selection:
             skin_selection()
-
         pygame.display.flip()
 
 def load_map(imgSrc: str):
@@ -314,19 +313,16 @@ def floor_selection():
 
 def skin_selection():
     global selection
+    global movable
+    movable = False
     screen.fill('black')
-    text_surface = font.render("Selectionnez votre personnage:", True, (255, 255, 255))
-    text_rect = (width-width/1.48, height-height/1.5)
-    text_surface_selection = font.render("1  2  3", True, 'yellow')
-    text_rect_selection =(width-width/1.85, height-height/1.8)
+    text_surface = font.render("selection", True, (255, 255, 255))
+    text_rect = (width-width/1.2, height-height/1.5)
     playerSprite = (pygame.image.load(player.imgSrc)).convert_alpha()
     playerSprite_rect = playerSprite.get_rect()
     playerSprite = pygame.transform.scale(playerSprite, (playerSprite_rect.width*zoomMapLevel, playerSprite_rect.height*zoomMapLevel))
     screen.blit(text_surface, text_rect)
-    screen.blit(text_surface_selection, text_rect_selection)
-    screen.blit(playerSprite, (width/2.06-player.width*zoomMapLevel, height/2), (4*zoomMapLevel*player.width, 2*player.height*zoomMapLevel, tileSize*zoomMapLevel, player.height*zoomMapLevel))
-    screen.blit(playerSprite, (width/2.06, height/2), (4*zoomMapLevel*player.width, 6*player.height*zoomMapLevel, tileSize*zoomMapLevel, player.height*zoomMapLevel))
-    screen.blit(playerSprite, (width/2.06+player.width*zoomMapLevel, height/2), (4*zoomMapLevel*player.width, 10*player.height*zoomMapLevel, tileSize*zoomMapLevel, player.height*zoomMapLevel))
+    screen.blit(playerSprite, (width/2, height/2), (0, 2*zoomMapLevel, 16*zoomMapLevel, 24*zoomMapLevel))
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_1]:
@@ -341,7 +337,6 @@ def skin_selection():
         player.char = 3
         player.frameY = 24*9
         selection = False
-    pygame.display.flip()
 
 selection = True
 movable = True
