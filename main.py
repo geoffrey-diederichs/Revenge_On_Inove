@@ -1,4 +1,5 @@
 import pygame
+from pygame.locals import *
 import gc
 import time
 from player import Player
@@ -25,7 +26,7 @@ background = Background()
 FPS = 144
 
 #text = ["on va tester les dialogues", "oui"]
-text = "BIG RATIO, A QUOI IL SERT\nOUI VRAIMENT NAWAK\nLE MATIN LE SOIR\nRATIO RATIO\nRATIO A TOI\npareil mais en miniscule"
+text = "BIG RATIO, A QUOI IL SERT\nOUI VRAIMENT NAWAK\nLE MATIN LE SOIR\nRATIO RATIO\nRATIO A TOI\n pareil mais en miniscule"
 player = Player(width/2, height/2)
 playerSprite = (pygame.image.load(player.imgSrc)).convert_alpha()
 playerSprite_rect = playerSprite.get_rect()
@@ -49,9 +50,11 @@ def dialogues(text: str):
     for line in text_arr:
         for char in line:
             if i == 5:
-                pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(width-width/1.178, height-height/3.31, width-width/3.26, height-height/1.265))
-                text_y_position = width-width/1.67
-                i = 0
+                event = pygame.event.wait()
+                if event.type == KEYDOWN:
+                    pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(width-width/1.178, height-height/3.31, width-width/3.26, height-height/1.265))
+                    text_y_position = width-width/1.67
+                    i = 0
             text_surface = font.render(char, True, (255, 255, 255))
             text_rect = (text_x_position, text_y_position)
             time.sleep(0.05)
@@ -139,8 +142,6 @@ def move():
 
     if keys[pygame.K_v]:
         dialogues(text)
-    if keys[pygame.K_TAB]:
-        floor_selection()
 
     if movable:
         player.position_y -= moveY
