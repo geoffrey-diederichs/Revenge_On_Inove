@@ -255,6 +255,12 @@ def load_map(imgSrc: str):
             'y': 56*tileSize*zoomMapLevel
         }
         collisionsArray = collision_floor1()
+    elif background.current_floor == 2:
+        background.offset = {
+            'x': 90.5*tileSize*zoomMapLevel,
+            'y': 56*tileSize*zoomMapLevel
+        }
+        collisionsArray = collision_floor2()
     else:
         collisionsArray = []
 
@@ -294,12 +300,12 @@ def floor_selection():
             background.current_floor = 2
             load_map("img/floor2.png")
     elif background.current_floor == 2:
-        text = ["Quel étage ?", "        RDC", "        1", "     > 2"]
+        text = ["Quel étage ?", "     RDC", "     1", "   > 2"]
         if keys2[pygame.K_0]:
             background.current_floor = 0
             load_map("img/floor0.png")
-        elif keys2[pygame.K_2]:
-            load_map("img/floor2.png")
+        elif keys2[pygame.K_1]:
+            load_map("img/floo11.png")
 
     text_y_position = width-width/1.28
     pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(width-width/2.95, height-height/1.58, width-width/1.218, height-height/1.22))
