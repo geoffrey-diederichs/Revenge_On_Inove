@@ -285,26 +285,26 @@ def floor_selection():
     keys2 = pygame.key.get_pressed()
     if background.current_floor == 0:
         text = ["Quel étage ?", "   > RDC", "     1", "     2"]
-        if keys2[pygame.K_1]:
+        if keys2[pygame.K_2]:
             background.current_floor = 1
             load_map("img/floor1.png")
-        elif keys2[pygame.K_2]:
+        elif keys2[pygame.K_3]:
             background.current_floor = 2
             load_map("img/floor2.png")
     elif background.current_floor == 1:
         text = ["Quel étage ?", "     RDC", "   > 1", "     2"]
-        if keys2[pygame.K_0]:
+        if keys2[pygame.K_1]:
             background.current_floor = 0
             load_map("img/floor0.png")
-        elif keys2[pygame.K_2]:
+        elif keys2[pygame.K_3]:
             background.current_floor = 2
             load_map("img/floor2.png")
     elif background.current_floor == 2:
         text = ["Quel étage ?", "     RDC", "     1", "   > 2"]
-        if keys2[pygame.K_0]:
+        if keys2[pygame.K_1]:
             background.current_floor = 0
             load_map("img/floor0.png")
-        elif keys2[pygame.K_1]:
+        elif keys2[pygame.K_2]:
             load_map("img/floo11.png")
 
     text_y_position = width-width/1.28
@@ -316,6 +316,17 @@ def floor_selection():
         text_rect = (width-width/3.1, text_y_position)
         screen.blit(text_surface, text_rect)
         text_y_position += width-width/1.02
+
+    font2 = pygame.font.Font("./font/DeterminationMono.ttf", 35)
+    text_select = "1\n2\n3"
+    selection_text = text_select.split("\n")
+    selection_y = height-height/1.75
+        
+    for line in selection_text:
+        text_surface = font2.render(line, True, "yellow")
+        text_rect = (width-width/3.3, selection_y)
+        screen.blit(text_surface, text_rect)
+        selection_y += height-height/1.037
 
 def skin_selection():
     global selection
