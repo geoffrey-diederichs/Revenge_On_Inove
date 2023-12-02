@@ -1,8 +1,9 @@
+from character import Character
 import character
 import random
 
 
-def fight(charac:character.Main_charac, enemy:character) -> int :
+def fight(charac:Character, enemy:Character) -> int:
     charac_items = charac.list_items_array()
     enemy_items = enemy.list_items_array()
 
@@ -46,53 +47,46 @@ def fight(charac:character.Main_charac, enemy:character) -> int :
         print()
         print(charac.get_name(), " : ", charac.health())
         print(enemy.get_name(), " : ", enemy.health(), "\n")
-    
-    if charac.is_alive() == 1:
+
+        """
+        charac.inflict_damages("fist", enemy)
+        print(charac.get_name(), charac.health())
+        print(enemy.get_name(), enemy.health(), "\n")
+        """
+
+    if charac.is_alive() != 1:
+        print("You lost...")
         return 0
+    print("YOU WON !")
     return 1
-
-def floor0(charac:character.Main_charac) -> int:
-    result = fight(charac, character.Student())
-    if result == 1:
-        return result
-    charac.add_item("coffee")
-
-    result = fight(charac, character.Depressed_student())
-    if result == 1:
-        return result
-    charac.add_item("rope")
-
-    result = fight(charac, character.School_referent())
-    if result == 1:
-        return result
-    charac.add_item("trello")
-
-    return 0
 
 def main():
     print("TEST ENGINE\n")
+
     print("Create your character")
     name = input("Name : ")
-    charac = character.Main_charac(name)
+    attack = 25
+    defense = 15
+    charac = Character.create("character", name, attack, defense)
+    student = Character.create("student")
+    mentor = Character.create("mentor")
+    teacher = Character.create("teacher")
     
-    result = 0
-    while (result == 0):
-        match (charac.get_level()):
-            case 0:
-                result = floor0(charac)
-                charac.up_level()
-            case 1:
-                print("1")
-            case 2:
-                print("2")
-            case 3:
-                print("3")
-
-    if result == 1:
-        print("\nYOU LOST !!")
+    print("\nROUND 1\n")
+    if fight(charac, student) == 0:
         exit()
-    print("\nYOU WON !!")
+    
+    charac.add_item("rope")
 
+    print("\nROUND 2\n")
+    if fight(charac, mentor) == 0:
+        exit()
 
+    charac.add_item("shell")
+
+    print("\nROUND 3\n")
+    if fight(charac, teacher) == 0:
+        exit()
+    
 if __name__ == "__main__":
     main()

@@ -10,20 +10,22 @@ class Item():
     def create(cls, key:str) -> Item:
         match key:
             case "fist":
-                return Item.create_fist()
+                return Fist()
             case "coffee":
-                return Item.create_coffee()
+                return Coffee()
             case "sword":
-                return Item.create_sword()
+                return Sword()
             case "rope":
-                return Item.create_rope()
+                return Rope()
+            case "trello":
+                return Trello()
             case "wooclap":
-                return Item.create_wooclap()
+                return item.Wooclap()
             case "shell":
-                return Item.create_shell()
+                return item.Shell()
             case "inexistent":
-                return Item.create_inexistent()
-        return Item.create_fist()
+                return item.Inexistent()
+        return item.Fist()
 
     @classmethod
     def create_fist(cls) -> Item:

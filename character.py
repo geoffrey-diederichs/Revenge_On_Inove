@@ -76,9 +76,9 @@ class Character:
                 return 1 
         return 0
 
-    def add_item(self, item:str) -> None:
-        if self.has_item(item) == 0:
-            self._items.append(Item.create(item))
+    def add_item(self, item_name:str) -> None:
+        if self.has_item(item_name) == 0:
+            self._items.append(item.Item.create(item_name))
     
     def remove_item(self, item:str) -> None:
         for i in self._items:
@@ -124,19 +124,12 @@ class Main_charac(Character):
     def __init__(self, name:str) -> Character:
         super().__init__(name, 100, 15, 15, [item.Fist()])
         self._level = 0
-        self._key = [0, 0, 0]
     
+    def get_level(self) -> int:
+        return self._level
+
     def up_level(self) -> None:
         self._level += 1
-
-    def check_key(self, key:int) -> int:
-        if (key < 4) or (key > 0):
-            return self._key[key-1]
-        return -1
-
-    def add_key(self, key:int) -> None:
-        if (key < 4) or (key > 0):
-            self._key[key-1] = 1
 
 class Student(Character):
     def __init__(self) -> Character:
@@ -148,7 +141,7 @@ class Depressed_student(Character):
 
 class School_referent(Character):
     def __init__(self) -> Character:
-        super().__init__("school referent", 100, 50, 10, [item.Trello()])
+        super().__init__("school referent", 100, 10, 10, [item.Trello()])
 
 class Mentor(Character):
     def __init__(self) -> Character:
