@@ -52,9 +52,7 @@ def fight(charac:character.Main_charac, enemy:character) -> int :
     return 1
 
 def floor(charac:character.Main_charac, data:[]) -> int:
-    print(len(data)/2)
-    for i in range(0, int(len(data)/2)-1):
-        print(i*2, data[i*2], data[i*2+1])
+    for i in range(0, int(len(data)/2)):
         result = fight(charac, data[i*2])
         if result == 1:
             return result
@@ -70,18 +68,20 @@ def main():
     charac = character.Main_charac(name)
     
     result = 0
-    while (result == 0):
+    while (charac.get_level() < 3) or (result == 0):
         match (charac.get_level()):
             case 0:
                 data = [character.Student(), "coffee", character.Depressed_student(), "rope", character.School_referent(), "trello"]
                 result = floor(charac, data)
                 charac.up_level()
             case 1:
-                print("1")
+                data = [character.Mentor(), "wooclap", character.Teacher(), "survey_monkey", character.Director(), "mug_inove"]
+                result = floor(charac, data)
+                charac.up_level()
             case 2:
-                print("2")
-            case 3:
-                print("3")
+                data = [character.Mentor2(), "", character.Mentor3(), "shell", character.Network_teacher(), ""]
+                result = floor(charac, data)
+                charac.up_level()
 
     if result == 1:
         print("\nYOU LOST !!")

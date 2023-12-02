@@ -23,6 +23,8 @@ class Item():
                 return Wooclap()
             case "survey_monkey":
                 return Survey_monkey()
+            case "mug_inove":
+                return Mug_inove()
             case "shell":
                 return item.Shell()
             case "inexistent":

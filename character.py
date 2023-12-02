@@ -124,11 +124,15 @@ class Main_charac(Character):
     def __init__(self, name:str) -> Character:
         super().__init__(name, 100, 15, 15, [item.Fist()])
         self._level = 0
-    
+   
+    def reset_health(self) -> None:
+        self._current_health = self._max_health
+
     def get_level(self) -> int:
         return self._level
 
     def up_level(self) -> None:
+        self.reset_health()
         self._level += 1
 
 class Student(Character):
@@ -161,11 +165,11 @@ class Mentor2(Character):
 
 class Mentor3(Character):
     def __init__(self) -> Character:
-        super.__init__("mentor 3", 100, 25, 25, [item.Wooclap(), item.Trello(), item.Shell()])
+        super().__init__("mentor 3", 100, 25, 25, [item.Wooclap(), item.Trello(), item.Shell()])
 
 class Network_teacher(Character):
     def __init__(self) -> Character:
-        super.__init__("network teacher", 200, 50, 50, [item.Shell(), item.Arch(), item.Windaube()])
+        super().__init__("network teacher", 200, 50, 50, [item.Shell(), item.Arch(), item.Windaube()])
 
 if __name__ == "__main__":
     pass
