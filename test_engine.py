@@ -51,22 +51,16 @@ def fight(charac:character.Main_charac, enemy:character) -> int :
         return 0
     return 1
 
-def floor0(charac:character.Main_charac) -> int:
-    result = fight(charac, character.Student())
-    if result == 1:
-        return result
-    charac.add_item("coffee")
-
-    result = fight(charac, character.Depressed_student())
-    if result == 1:
-        return result
-    charac.add_item("rope")
-
-    result = fight(charac, character.School_referent())
-    if result == 1:
-        return result
-    charac.add_item("trello")
-
+def floor(charac:character.Main_charac, data:[]) -> int:
+    print(len(data)/2)
+    for i in range(0, int(len(data)/2)-1):
+        print(i*2, data[i*2], data[i*2+1])
+        result = fight(charac, data[i*2])
+        if result == 1:
+            return result
+        if data[(i*2)+1] != "":
+            charac.add_item(data[(i*2)+1])
+    
     return 0
 
 def main():
@@ -79,7 +73,8 @@ def main():
     while (result == 0):
         match (charac.get_level()):
             case 0:
-                result = floor0(charac)
+                data = [character.Student(), "coffee", character.Depressed_student(), "rope", character.School_referent(), "trello"]
+                result = floor(charac, data)
                 charac.up_level()
             case 1:
                 print("1")

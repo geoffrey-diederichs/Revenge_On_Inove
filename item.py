@@ -20,7 +20,9 @@ class Item():
             case "trello":
                 return Trello()
             case "wooclap":
-                return item.Wooclap()
+                return Wooclap()
+            case "survey_monkey":
+                return Survey_monkey()
             case "shell":
                 return item.Shell()
             case "inexistent":
