@@ -66,7 +66,7 @@ def dialogues():
     i = 0
     for line in text_arr:
         if i == 5:
-            time.sleep(0.5)
+            time.sleep(0.3)
             pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(width-width/1.178, height-height/3.31, width-width/3.26, height-height/1.265))
             text_y_position = width-width/1.67
             text_x_position = width-width/1.2
@@ -171,7 +171,7 @@ def move():
         before_last_key = tmp_key 
 
     if keys[pygame.K_SPACE]:
-        player.sprint = 0.5
+        player.sprint = 0.8
     else:
         player.sprint = 0
 
@@ -181,7 +181,7 @@ def check_collisions(direction: str, collision: Collision):
             player.position_x + player.width >= collision.fixedX and
             player.position_y + player.height + 2.3*tileSize >= collision.fixedY and
             player.position_y - 2.3*tileSize<= collision.fixedY + collision.size):
-            if collision.id != 126:
+            if collision.id != 126 and collision.id != 0:
                 check_fight(collision)
             else:
                 return True
@@ -190,7 +190,7 @@ def check_collisions(direction: str, collision: Collision):
             player.position_x + player.width+4*tileSize >= collision.fixedX and
             player.position_y + player.height + 2.3*tileSize >= collision.fixedY and
             player.position_y - 2.3*tileSize <= collision.fixedY + collision.size):
-            if collision.id != 126:
+            if collision.id != 126 and collision.id != 0:
                 check_fight(collision)
             else:
                 return True
@@ -199,7 +199,7 @@ def check_collisions(direction: str, collision: Collision):
             player.position_x + player.width + 3.5*tileSize >= collision.fixedX and
             player.position_y + player.height>= collision.fixedY and
             player.position_y -3*tileSize<= collision.fixedY + collision.size):
-            if collision.id != 126:
+            if collision.id != 126 and collision.id != 0:
                 check_fight(collision)
             else:
                 return True
@@ -208,7 +208,7 @@ def check_collisions(direction: str, collision: Collision):
             player.position_x + player.width + 3.5*tileSize >= collision.fixedX and
             player.position_y + player.height +3*tileSize>= collision.fixedY and
             player.position_y<= collision.fixedY + collision.size):
-            if collision.id != 126:
+            if collision.id != 126 and collision.id != 0:
                 check_fight(collision)
             else:
                 return True
@@ -226,6 +226,8 @@ def check_fight(collision):
 def main():
     clock = pygame.time.Clock()
     load_map("img/floor0.png")
+    while True:
+        start_fight()
     dialogues()
 
     while True:
@@ -304,14 +306,28 @@ def load_map(imgSrc: str):
     #create instance of all collision
     for i in range(1, len(collisionsMap), 1):
         for j in range(0, 150, 1):
-            if (collisionsMap[i][j] == 126):
+            if (collisionsMap[i][j] == 257):
+                Collision((j)*zoomMapLevel*tileSize-background.offset['x'], (i-1.3)*zoomMapLevel*tileSize-background.offset['y'], 257)
+            elif (collisionsMap[i][j] == 258):
+                Collision((j)*zoomMapLevel*tileSize-background.offset['x'], (i-1.3)*zoomMapLevel*tileSize-background.offset['y'], 258)
+            elif (collisionsMap[i][j] == 259):
+                Collision((j)*zoomMapLevel*tileSize-background.offset['x'], (i-1.3)*zoomMapLevel*tileSize-background.offset['y'], 259)
+            elif (collisionsMap[i][j] == 260):
+                Collision((j)*zoomMapLevel*tileSize-background.offset['x'], (i-1.3)*zoomMapLevel*tileSize-background.offset['y'], 260)
+            elif (collisionsMap[i][j] == 261):
+                Collision((j)*zoomMapLevel*tileSize-background.offset['x'], (i-1.3)*zoomMapLevel*tileSize-background.offset['y'], 261)
+            elif (collisionsMap[i][j] == 262):
+                Collision((j)*zoomMapLevel*tileSize-background.offset['x'], (i-1.3)*zoomMapLevel*tileSize-background.offset['y'], 262)
+            elif (collisionsMap[i][j] == 263):
+                Collision((j)*zoomMapLevel*tileSize-background.offset['x'], (i-1.3)*zoomMapLevel*tileSize-background.offset['y'], 263)
+            elif (collisionsMap[i][j] == 264):
+                Collision((j)*zoomMapLevel*tileSize-background.offset['x'], (i-1.3)*zoomMapLevel*tileSize-background.offset['y'], 264)
+            elif (collisionsMap[i][j] == 265):
+                Collision((j)*zoomMapLevel*tileSize-background.offset['x'], (i-1.3)*zoomMapLevel*tileSize-background.offset['y'], 265)
+            elif (collisionsMap[i][j] == 266):
+                Collision((j)*zoomMapLevel*tileSize-background.offset['x'], (i-1.3)*zoomMapLevel*tileSize-background.offset['y'], 266)
+            elif (collisionsMap[i][j] == 126):
                 Collision((j)*zoomMapLevel*tileSize-background.offset['x'], (i-1.3)*zoomMapLevel*tileSize-background.offset['y'])
-            elif (collisionsMap[i][j] == 92):
-                Collision((j)*zoomMapLevel*tileSize-background.offset['x'], (i-1.3)*zoomMapLevel*tileSize-background.offset['y'], 92)
-            elif (collisionsMap[i][j] == 184):
-                Collision((j)*zoomMapLevel*tileSize-background.offset['x'], (i-1.3)*zoomMapLevel*tileSize-background.offset['y'], 92)
-            elif (collisionsMap[i][j] == 99):
-                Collision((j)*zoomMapLevel*tileSize-background.offset['x'], (i-1.3)*zoomMapLevel*tileSize-background.offset['y'], 99)
 
 def floor_selection():
     global font
