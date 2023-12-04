@@ -1,26 +1,48 @@
-# Revenge_On_Inove
+BEL Alexande, DIEDERICHS Geoffrey, HANSON Lucas
 
-Mini-jeux python en 2D.
+# Projet Python
 
-## Histoire
+Bienvenue dans Revenge On Inove, un jeu d'aventure développé en Python avec Pygame. Dans ce jeu, vous incarnez un étudiant astucieux qui a décidé de hacker son école. Cependant, cette action a rendu tous les étudiants, professeurs, mentors et membres de l'administration furieux contre vous. Pour regagner le contrôle, vous devez vous aventurer dans chaque étage du bâtiment et affronter vos adversaires.
 
-Après avoir hacké Inove, un étudiant est punni par son professeur de réseaux : il doit arriver au deuxième étage du bâtiment pour récupérer son ordinateur. Seulement les étudiants et professeurs lui en veulent d'avoir été hacké, il va faloir se battre pour récupérer son ordinateur.
+## Instructions
 
-## Mécaniques
+### Objectif
+Votre objectif principal est de naviguer à travers les étages de l'école, affronter des adversaires et progresser jusqu'à la victoire finale.
 
-Déplacement en 2D dans 3 différentes cartes, collision avec des ennemis positionné au préalable pour ouvrir un mode de combat en tour par tour.
+### Contrôles
+- Utilisez les touches directionnelles pour vous déplacer dans le bâtiment et interargir avec les menus.
+- Appuyez sur la touche d'espace pour courir.
+- Utiliser la touche e pour interagir
+
+### Déroulement du jeu
+1. **Début:**
+   - Lancer le jeu en exécutant le fichier principal `main.py`.
+
+2. **Exploration des étages:**
+   - Parcourez chaque étage du bâtiment en évitant les ennemis et en cherchant des indices pour progresser.
+
+3. **Affrontements épiques:**
+   - Lorsque vous rencontrez un étudiant, un professeur, un mentor ou un membre de l'administration, le jeu bascule en mode combat.
+   - Utilisez des tactiques astucieuses pour vaincre vos adversaires et avancer.
+
+4. **Ascenseur:**
+   - Terminez tous les combats d'un étage pour débloquer l'ascenseur.
+   - Utilisez l'ascenseur pour passer à l'étage suivant.
+
+5. **Répétez le processus:**
+   - Répétez l'exploration, les combats et l'utilisation de l'ascenseur jusqu'à ce que vous ayez conquis tous les étages de l'école.
 
 ## Détails techniques
 
-### - Mécaniques de combats
+### Mécaniques de combats
 
-### character.py
+#### character.py
 
 Fichier contenant les classes de personnages utiliser dans le jeux. Les personnages disposent d'items (décrits plus bas), pour calculer les dégats inligés à un autre personnage on additionne l'attaque de l'attaquant, de son item choisie, et soustraie ce total à la défense de la cible. Si le résultat est positif : la cible reçoit les dégats. Si le résultat est nul : il ne se passe rien. Si le résultats est négatif : l'attaquant subit les dégâts. Les personnages disposent d'une liste d'items à laquelle on peut rajouter et enlever des items.
 
 Chaque personnage du jeu dispose de sa classe héritant de la classe Character. La classe Main_character a une variable stockant le niveau du personnage pour lui augmenter ses statistiques en cours de jeu, et la possibilité de réinitialiser ses points de vies après le combat d'un boss (et avant celui du boss final).
 
-### item.py
+#### item.py
 
 Fichier contenant les items utilisés par les personnages. Les items sont uniquement caractérisés par un nom et les dégâts qu'ils infligent. 
 
