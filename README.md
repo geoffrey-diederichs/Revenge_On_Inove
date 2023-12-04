@@ -1,4 +1,4 @@
-BEL Alexande, DIEDERICHS Geoffrey, HANSON Lucas
+BEL Alexandre, DIEDERICHS Geoffrey, HANSON Lucas
 
 # Projet Python
 
@@ -51,3 +51,13 @@ Chaque item dispose de sa classe héritant de la classe Item et la méthode crea
 ### II. Pygames
 
 ### III. Cartes
+
+#### floor*.png
+
+Images des maps de chaque étage créées en utilisant l'outil Tiled. Ces cartes permettent à pygame de faire déplacer notre personnage sur l'écran afin de pouvoir explorer. Nous avons une couche cachée par-dessus de chaque image, qui nous permet lorsque nous exportons le fichier, de déterminer si chaque pixel s'agit d'un mur, ou d'un pixel où nous pouvons nous déplacer librement.
+
+#### collisionsMap.py
+
+Fichier contenant des tableaux de valeurs créées lorsque nous exportons la couche collisions des images. Ce fichier nous permet de savoir l'id de chaque pixel dans l'image, et donc de savoir si nous avons le droit de nous déplacer ou pas.
+
+
