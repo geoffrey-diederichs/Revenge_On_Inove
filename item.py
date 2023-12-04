@@ -80,5 +80,6 @@ class Windaube(Item):
     def __init__(self) -> Item:
         super().__init__("windaube", 60)
 
+
 if __name__ == "__main__":
     pass

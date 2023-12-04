@@ -144,5 +144,6 @@ class Network_teacher(Character):
     def __init__(self) -> Character:
         super().__init__("network teacher", 200, 40, 30, [item.Fist(), item.Arch(), item.Windaube()])
 
+
 if __name__ == "__main__":
     pass
