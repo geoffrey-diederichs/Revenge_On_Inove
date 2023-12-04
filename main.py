@@ -3,6 +3,7 @@ import json
 from pygame.locals import *
 import gc
 import time
+import random
 from character.py import *
 from player import Player
 from collisionsMap import * 
@@ -29,6 +30,7 @@ current_dialogue = 0
 FPS = 144
 
 #text = ["on va tester les dialogues", "oui"]
+charac = Main_character("main charac")
 player = Player(width/2, height/2)
 playerSprite = (pygame.image.load(player.imgSrc)).convert_alpha()
 playerSprite_rect = playerSprite.get_rect()
@@ -420,27 +422,88 @@ def check_if_elevator_near():
     else:
         near_escalator = False
 
+fight_data = [character.Student(), "coffee", character.Depressed_student(), "rope", character.School_referent(), "trello", haracter.Mentor(), "wooclap", character.Teacher(), "survey_monkey", character.Director(), "mug_inove", character.Mentor2(), "", character.Mentor3(), "shell", character.Network_teacher(), ""]
+
 def start_fight():
     for i in range(0, height+height//20, height//20):
         pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(0, 0, width, i))
         time.sleep(0.05)
         pygame.display.flip()
     fight = True
+    text = ""
+    enemy = data[background.current_dialogue-1]
+    if enemy.get_name() == "network teacher":
+        charac.reset_health()
+    elif enemy.get_name() == "mentor" of enemy.get_name() == "mentor 2":
+        charac.up_level()
+    charac_items = charac.list_items_array()
+    enemy_items = enemy.list_items_array()
     while fight:
         pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(width/40, height/13, width-width/1.2, height/1.22))
         pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(width/4, height/2-height/5, width/1.5, height/2.88))
         screen.blit(playerSprite, (width/2, height/1.3), (zoomMapLevel, player.frameY*zoomMapLevel, player.width*zoomMapLevel, player.height*zoomMapLevel))
-
-        text = "ton texte"
-        #floor = background.current_floor
-        #adv = background.current_dialogue o | 1 | 2 | 3 |4 |5 |6 |7 | 8 | 9
+        
+        if test == "":
+            text = "Choose an item"
         text_surface = font.render(text, True, (0, 0, 0))
         screen.blit(text_surface, (width/4, height/2-height/5))
-        print(list_items_array())
+        
+        text = ""
 
         pygame.display.flip()
-        time.sleep(2)
-        fight = False
+        time.sleep(2) # Event freeze select item, store it in item
+
+        damages = charac.inflict_damages(charac_items[int(item)-1], enemy)
+        if damages > 1:
+            text = "Tu as infligé "+str(damages)+" dégâts."
+        elif damages == 1:
+            text = "Tu as infligé 1 dégât."
+        elif damages == 0:
+            text = "Il ne c'est rien passé."
+        elif damages < 0:
+            text = "Il t'a contré et t'inflige "+str(damages)+"dégâts."
+
+        if enemy.is_alive() == 0:
+            fight = False
+
+        randNbr = random.randint(0, len(enemy_items)-1)
+        damages = enemy.inflict_damages(enemy_items[randNbr], charac)
+        
+        text += "\n"
+        if damages > 1:
+            text += "Il t'a infligé "+str(damages)+" dégâts."
+        elif damages == 1:
+            text += "Il t'a infligé 1 dégât."
+        elif damages == 0:
+            text += "Il ne c'est rien passé."
+        else:
+            text += "Tu l'as contré et lui inflige "+str(damages)+" dégâts."
+
+        if charac.is_alive() == 0:
+            lost()
+        elif (enemy.is_alive() == 0) and (enemy.get_name() == "network manager"):
+            won()
+        elif enemy.is_alive() == 0:
+            fight = False
+
+def lost():
+    pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(0, 0, width, height))
+    text_surface = font.render("You lost", True, "red")
+    text_rect = (width/2-width/20, height/2-height/20)
+    screen.blit(text_surface, text_rect)
+    pygame.display.flip()
+    time.sleep(5)
+    exit(0)
+
+def won():
+    pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(0, 0, width, height))
+    text_surface = font.render("You won", True, "green")
+    text_rect = (width/2-width/20, height/2-height/20)
+    screen.blit(text_surface, text_rect)
+    pygame.display.flip()
+    time.sleep(5)
+    exit(0)
+
 
 selection = True
 movable = True
