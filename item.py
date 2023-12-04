@@ -50,7 +50,7 @@ class Trello(Item):
 
 class Wooclap(Item):
     def __init__(self) -> Item:
-        super().__init__("wooclap", 7)
+        super().__init__("wooclap", 20)
 
 class Inexistent(Item):
     def __init__(self) -> Item:

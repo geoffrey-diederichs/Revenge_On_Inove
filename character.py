@@ -118,11 +118,11 @@ class Depressed_student(Character):
 
 class School_referent(Character):
     def __init__(self) -> Character:
-        super().__init__("school referent", 100, 10, 10, [item.Trello()])
+        super().__init__("school referent", 100, 10, 10, [item.Trello(), item.Trello(), item.Wooclap()])
 
 class Mentor(Character):
     def __init__(self) -> Character:
-        super().__init__("mentor", 50, 20, 15, [item.Wooclap()])
+        super().__init__("mentor", 50, 25, 15, [item.Fist(), item.Wooclap()])
 
 class Teacher(Character):
     def __init__(self) -> Character:
@@ -130,7 +130,7 @@ class Teacher(Character):
 
 class Director(Character):
     def __init__(self) -> Character:
-        super().__init__("director", 100, 25, 20, [item.Fist(), item.Google()])
+        super().__init__("director", 100, 25, 20, [item.Fist(), item.Fist(), item.Google()])
 
 class Mentor2(Character):
     def __init__(self) -> Character:
@@ -138,7 +138,7 @@ class Mentor2(Character):
 
 class Mentor3(Character):
     def __init__(self) -> Character:
-        super().__init__("mentor 3", 100, 40, 0, [item.Wooclap(), item.Trello(), item.Shell()])
+        super().__init__("mentor 3", 100, 0, 0, [item.Wooclap(), item.Trello(), item.Shell()])
 
 class Network_teacher(Character):
     def __init__(self) -> Character:

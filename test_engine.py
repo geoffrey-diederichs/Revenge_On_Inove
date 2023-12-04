@@ -31,6 +31,9 @@ def fight(charac:character.Main_charac, enemy:character) -> int :
         elif damages < 0:
             print("He countered and inflicted you", damages, "damages")
         
+        if enemy.is_alive() == 0:
+            break
+
         randNbr = random.randint(0, len(enemy_items)-1)
         damages = enemy.inflict_damages(enemy_items[randNbr], charac)
 
