@@ -70,7 +70,7 @@ def dialogues():
     i = 0
     for line in text_arr:
         if i == 5:
-            time.sleep(0.0)
+            time.sleep(0.01)
             pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(width-width/1.178, height-height/3.31, width-width/3.26, height-height/1.265))
             text_y_position = width-width/1.67
             text_x_position = width-width/1.2
@@ -78,14 +78,14 @@ def dialogues():
         for char in line:
             text_surface = font.render(char, True, (255, 255, 255))
             text_rect = (text_x_position, text_y_position)
-            time.sleep(0.0)
+            time.sleep(0.04)
             screen.blit(text_surface, text_rect)
             pygame.display.flip()
             text_x_position+= width-width/1.014
         text_x_position = width-width/1.2
         text_y_position += width-width/1.02
         i += 1
-    time.sleep(0)
+    time.sleep(1)
     current_dialogue+=1
 
 def info():
@@ -175,7 +175,7 @@ def move():
         before_last_key = tmp_key 
 
     if keys[pygame.K_SPACE]:
-        player.sprint = 2.8
+        player.sprint = 0.8
     else:
         player.sprint = 0
 
@@ -557,7 +557,7 @@ def start_fight():
             for char in line:
                 text_surface = font.render(char, True, (0, 0, 0))
                 text_rect = (text_x_position, text_y_position)
-                time.sleep(0.0)
+                time.sleep(0.01)
                 screen.blit(text_surface, text_rect)
                 pygame.display.flip()
                 text_x_position+= width-width/1.014
