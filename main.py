@@ -557,7 +557,7 @@ def start_fight():
 
         if charac.is_alive() == 0:
             lost()
-        elif (enemy.is_alive() == 0) and (enemy.get_name() == "network manager"):
+        elif (enemy.is_alive() == 0) and (enemy.get_name() == "network teacher"):
             won()
         elif enemy.is_alive() == 0:
             charac.add_item(fight_data[(current_enemy*2)+1])
