@@ -6,6 +6,9 @@ class Item():
         self._name = name
         self._attack = attack
 
+    def __str__(self) -> str:
+        return f"{self._name}, {self._attack} attack."
+
     @classmethod
     def create(cls, key:str) -> Item:
         match key:
@@ -13,8 +16,6 @@ class Item():
                 return Fist()
             case "coffee":
                 return Coffee()
-            case "sword":
-                return Sword()
             case "rope":
                 return Rope()
             case "trello":
@@ -26,41 +27,10 @@ class Item():
             case "mug_inove":
                 return Mug_inove()
             case "shell":
-                return item.Shell()
+                return Shell()
             case "inexistent":
-                return item.Inexistent()
+                return Inexistent()
         return item.Fist()
-
-    @classmethod
-    def create_fist(cls) -> Item:
-        return Item("fist", 1)
-
-    @classmethod
-    def create_coffee(cls) -> Item:
-        return Item("coffee", 3)
-
-    @classmethod
-    def create_sword(cls) -> Item:
-        return Item("sword", 5)
-
-    @classmethod
-    def create_rope(cls) -> Item:
-        return Item("rope", -500)
-    
-    @classmethod
-    def create_wooclap(cls) -> Item:
-        return Item("wooclap", 10)
-
-    @classmethod
-    def create_shell(cls) -> Item:
-        return Item("shell", 200)
-    
-    @classmethod
-    def create_inexistent(cls) -> Item:
-        return Item("inexistent", -100000)
-
-    def __str__(self) -> str:
-        return f"{self._name}, {self._attack} attack."
 
 class Fist(Item):
     def __init__(self) -> Item:
@@ -80,7 +50,7 @@ class Trello(Item):
 
 class Wooclap(Item):
     def __init__(self) -> Item:
-        super().__init__("wooclap", 0)
+        super().__init__("wooclap", 7)
 
 class Inexistent(Item):
     def __init__(self) -> Item:
@@ -100,15 +70,15 @@ class Mug_inove(Item):
 
 class Shell(Item):
     def __init__(self) -> Item:
-        super().__init__("shell", 50)
+        super().__init__("shell", 80)
 
 class Arch(Item):
     def __init__(self) -> Item:
-        super().__init__("arch", 60)
+        super().__init__("arch", 50)
 
 class Windaube(Item):
     def __init__(self) -> Item:
-        super().__init__("windaube", 70)
+        super().__init__("windaube", 60)
 
 if __name__ == "__main__":
     pass

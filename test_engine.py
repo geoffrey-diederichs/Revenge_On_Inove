@@ -47,19 +47,22 @@ def fight(charac:character.Main_charac, enemy:character) -> int :
         print(charac.get_name(), " : ", charac.health())
         print(enemy.get_name(), " : ", enemy.health(), "\n")
     
-    if charac.is_alive() == 1:
+    if charac.is_alive() == 0:
         return 0
     return 1
 
 def floor(charac:character.Main_charac, data:[]) -> int:
     for i in range(0, int(len(data)/2)):
+        if data[i*2].get_name() == "network teacher":
+            charac.reset_health()
         result = fight(charac, data[i*2])
-        if result == 1:
+        if result == 0:
             return result
+        print("\n"+"You beat "+data[i*2].get_name()+" !", end="\n\n")
         if data[(i*2)+1] != "":
             charac.add_item(data[(i*2)+1])
     
-    return 0
+    return 1
 
 def main():
     print("TEST ENGINE\n")
@@ -67,8 +70,8 @@ def main():
     name = input("Name : ")
     charac = character.Main_charac(name)
     
-    result = 0
-    while (charac.get_level() < 3) or (result == 0):
+    result = 1
+    while (charac.get_level() < 3) and (result == 1):
         match (charac.get_level()):
             case 0:
                 data = [character.Student(), "coffee", character.Depressed_student(), "rope", character.School_referent(), "trello"]
@@ -83,11 +86,10 @@ def main():
                 result = floor(charac, data)
                 charac.up_level()
 
-    if result == 1:
+    if result == 0:
         print("\nYOU LOST !!")
         exit()
     print("\nYOU WON !!")
-
 
 if __name__ == "__main__":
     main()

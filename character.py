@@ -17,35 +17,6 @@ class Character:
         self._defense = defense
         self._items = items
     
-    @classmethod
-    def create(cls, key:str, name:str="", attack:int=0, defense:int=0) -> Character:
-        match key:
-            case "character":
-                return Character.create_character(name, attack, defense)
-            case "student":
-                return Character.create_student()
-            case "mentor":
-                return Character.create_mentor()
-            case "teacher":
-                return Character.create_teacher()
-        return Character.create_student()
-
-    @classmethod
-    def create_character(cls, name:int, attack:int, defense:int) -> Character:
-        return Character(name, 100, attack, defense, [Item.create("fist")])
-
-    @classmethod
-    def create_student(cls) -> Character:
-        return Character("Student", 30, 10, 10, [Item.create("fist"), Item.create("coffee")])
-
-    @classmethod
-    def create_mentor(cls) -> Character:
-        return Character("Mentor", 50, 20, 10, [Item.create("fist"), Item.create("wooclap")])
-
-    @classmethod
-    def create_teacher(cls) -> Character:
-        return Character("Teacher", 1000, 50, 100, [Item.create("inexistent")])
-
     def __str__(self) -> str:
         return f"{self._name}, {self._current_health}/{self._max_health}hp, {self._attack} attack, {self._defense} defense, {len(self._items)} items."
    
@@ -134,6 +105,8 @@ class Main_charac(Character):
     def up_level(self) -> None:
         self.reset_health()
         self._level += 1
+        self._attack += 10 
+        self._defense += 10
 
 class Student(Character):
     def __init__(self) -> Character:
@@ -157,19 +130,19 @@ class Teacher(Character):
 
 class Director(Character):
     def __init__(self) -> Character:
-        super().__init__("director", 100, 50, 20, [item.Fist(), item.Wooclap(), item.Google()])
+        super().__init__("director", 100, 25, 20, [item.Fist(), item.Google()])
 
 class Mentor2(Character):
     def __init__(self) -> Character:
-        super().__init__("mentor 2", 100, 25, 25, [item.Wooclap(), item.Trello()])
+        super().__init__("mentor 2", 100, 40, 20, [item.Wooclap(), item.Trello()])
 
 class Mentor3(Character):
     def __init__(self) -> Character:
-        super().__init__("mentor 3", 100, 25, 25, [item.Wooclap(), item.Trello(), item.Shell()])
+        super().__init__("mentor 3", 100, 40, 0, [item.Wooclap(), item.Trello(), item.Shell()])
 
 class Network_teacher(Character):
     def __init__(self) -> Character:
-        super().__init__("network teacher", 200, 50, 50, [item.Shell(), item.Arch(), item.Windaube()])
+        super().__init__("network teacher", 200, 40, 30, [item.Fist(), item.Arch(), item.Windaube()])
 
 if __name__ == "__main__":
     pass
