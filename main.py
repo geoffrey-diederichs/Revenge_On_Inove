@@ -431,7 +431,8 @@ def start_fight():
         pygame.display.flip()
     fight = True
     text = ""
-    enemy = fight_data[current_dialogue-1]
+    current_dialogue = 0 
+    enemy = fight_data[current_dialogue*2]
     if enemy.get_name() == "network teacher":
         charac.reset_health()
     elif enemy.get_name() == "mentor" or enemy.get_name() == "mentor 2":
@@ -443,15 +444,15 @@ def start_fight():
         pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(width/4, height/2-height/5, width/1.5, height/2.88))
         screen.blit(playerSprite, (width/2, height/1.3), (zoomMapLevel, player.frameY*zoomMapLevel, player.width*zoomMapLevel, player.height*zoomMapLevel))
         
-        if test == "":
+        if text == "":
             text = f"Choose an item, 1-{(len(charac_items)-1)}"
         text_surface = font.render(text, True, (0, 0, 0))
         screen.blit(text_surface, (width/4, height/2-height/5))
 
         #time.sleep(2) # Event freeze select item, store it in item
         e = pygame.event.wait()
-        if e > 0 and e < len(charac_items):
-            item = e 
+        
+        item = 0 
 
         damages = charac.inflict_damages(charac_items[int(item)-1], enemy)
         if damages > 1:
