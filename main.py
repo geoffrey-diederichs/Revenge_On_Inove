@@ -47,9 +47,9 @@ def dialogues():
     #draw the character face
     #pygame.draw.rect(screen, "green", pygame.Rect(width-width/1.19, height-height/3.44, width-width/1.1, height-height/1.2))
 
-    text_y_position = width-width/1.67 
+    text_y_position = width-width/1.67
     text_x_position = width-width/1.2
-    
+
     index = 0
     text_return = ''
     for i in text:
@@ -65,23 +65,22 @@ def dialogues():
     #allow to have multiple lines of dialogue
     i = 0
     for line in text_arr:
+        if i == 5:
+            time.sleep(0.5)
+            pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(width-width/1.178, height-height/3.31, width-width/3.26, height-height/1.265))
+            text_y_position = width-width/1.67
+            text_x_position = width-width/1.2
+            i = 0
         for char in line:
-            if i == 4:
-                event = pygame.event.wait()
-                if event.type == KEYDOWN:
-                    pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(width-width/1.178, height-height/3.31, width-width/3.26, height-height/1.265))
-                    text_y_position = width-width/1.67
-                    text_x_position = width-width/1.2
-                    i = 0
             text_surface = font.render(char, True, (255, 255, 255))
             text_rect = (text_x_position, text_y_position)
             time.sleep(0.05)
             screen.blit(text_surface, text_rect)
             pygame.display.flip()
             text_x_position+= width-width/1.014
-        i += 1
         text_x_position = width-width/1.2
         text_y_position += width-width/1.02
+        i += 1
     time.sleep(1)
     current_dialogue+=1
 
