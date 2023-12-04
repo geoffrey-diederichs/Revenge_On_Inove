@@ -414,7 +414,7 @@ def check_if_elevator_near():
     global near_escalator
     if background.current_floor == 2:
         return False
-    if (player.position_x > -144 and player.position_x < 21 and player.position_y < -200 and player.position_y > -324 and current_enemy == 3 and background.current_floor == 0) or (current_enemy == 6 and background.current_floor == 1 and player.position_x > -144 and player.position_x < 21 and player.position_y < -200 and player.position_y > -324): 
+    if player.position_x > -144 and player.position_x < 21 and player.position_y < -200 and player.position_y > -324:
         text_surface = font.render("[e]", True,"yellow") 
         text_rect = (width/2-player.width/2, height/2+height-height/0.98)
         screen.blit(text_surface, text_rect)
