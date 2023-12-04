@@ -431,7 +431,9 @@ fight_data = [character.Student(), "coffee", character.Depressed_student(), "rop
 def start_fight():
     fight = True
     text = ""
+    print(current_dialogue)
     enemy = fight_data[current_dialogue*2]
+    print(enemy)
     if enemy.get_name() == "network teacher":
         charac.reset_health()
     elif enemy.get_name() == "mentor" or enemy.get_name() == "mentor 2":
@@ -555,6 +557,7 @@ def start_fight():
         elif (enemy.is_alive() == 0) and (enemy.get_name() == "network manager"):
             won()
         elif enemy.is_alive() == 0:
+            charac.add_item(fight_data[(current_dialogue*2)+1])
             fight = False
 
 def lost():
