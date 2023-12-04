@@ -4,8 +4,8 @@ from pygame.locals import *
 import gc
 import time
 import random
-from character.py import *
 from player import Player
+import character
 from collisionsMap import * 
 from collision import * 
 from background import *
@@ -30,7 +30,7 @@ current_dialogue = 0
 FPS = 144
 
 #text = ["on va tester les dialogues", "oui"]
-charac = Main_character("main charac")
+charac = character.Main_charac("main charac")
 player = Player(width/2, height/2)
 playerSprite = (pygame.image.load(player.imgSrc)).convert_alpha()
 playerSprite_rect = playerSprite.get_rect()
@@ -422,7 +422,7 @@ def check_if_elevator_near():
     else:
         near_escalator = False
 
-fight_data = [character.Student(), "coffee", character.Depressed_student(), "rope", character.School_referent(), "trello", haracter.Mentor(), "wooclap", character.Teacher(), "survey_monkey", character.Director(), "mug_inove", character.Mentor2(), "", character.Mentor3(), "shell", character.Network_teacher(), ""]
+fight_data = [character.Student(), "coffee", character.Depressed_student(), "rope", character.School_referent(), "trello", character.Mentor(), "wooclap", character.Teacher(), "survey_monkey", character.Director(), "mug_inove", character.Mentor2(), "", character.Mentor3(), "shell", character.Network_teacher(), ""]
 
 def start_fight():
     for i in range(0, height+height//20, height//20):
@@ -431,10 +431,10 @@ def start_fight():
         pygame.display.flip()
     fight = True
     text = ""
-    enemy = data[background.current_dialogue-1]
+    enemy = fight_data[current_dialogue-1]
     if enemy.get_name() == "network teacher":
         charac.reset_health()
-    elif enemy.get_name() == "mentor" of enemy.get_name() == "mentor 2":
+    elif enemy.get_name() == "mentor" or enemy.get_name() == "mentor 2":
         charac.up_level()
     charac_items = charac.list_items_array()
     enemy_items = enemy.list_items_array()
@@ -444,14 +444,14 @@ def start_fight():
         screen.blit(playerSprite, (width/2, height/1.3), (zoomMapLevel, player.frameY*zoomMapLevel, player.width*zoomMapLevel, player.height*zoomMapLevel))
         
         if test == "":
-            text = "Choose an item"
+            text = f"Choose an item, 1-{(len(charac_items)-1)}"
         text_surface = font.render(text, True, (0, 0, 0))
         screen.blit(text_surface, (width/4, height/2-height/5))
-        
-        text = ""
 
-        pygame.display.flip()
-        time.sleep(2) # Event freeze select item, store it in item
+        #time.sleep(2) # Event freeze select item, store it in item
+        e = pygame.event.wait()
+        if e > 0 and e < len(charac_items):
+            item = e 
 
         damages = charac.inflict_damages(charac_items[int(item)-1], enemy)
         if damages > 1:
@@ -485,6 +485,7 @@ def start_fight():
             won()
         elif enemy.is_alive() == 0:
             fight = False
+    pygame.display.flip()
 
 def lost():
     pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(0, 0, width, height))
