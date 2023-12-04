@@ -571,7 +571,8 @@ def start_fight():
         elif enemy.is_alive() == 0:
             charac.add_item(fight_data[(current_enemy*2)+1])
             current_enemy += 1
-            if (enemy.get_name() == "school referent") and (enemy.get_name() == "director"):
+            if (enemy.get_name() == "school referent") or (enemy.get_name() == "director"):
+                dialogues()
                 dialogues()
             fight = False
 
