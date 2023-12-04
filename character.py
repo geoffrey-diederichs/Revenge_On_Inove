@@ -134,7 +134,7 @@ class Director(Character):
 
 class Mentor2(Character):
     def __init__(self) -> Character:
-        super().__init__("mentor 2", 100, 40, 20, [item.Wooclap(), item.Trello()])
+        super().__init__("mentor 2", 100, 10, 20, [item.Wooclap(), item.Trello()])
 
 class Mentor3(Character):
     def __init__(self) -> Character:
