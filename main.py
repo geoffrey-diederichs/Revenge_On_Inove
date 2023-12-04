@@ -3,6 +3,7 @@ import json
 from pygame.locals import *
 import gc
 import time
+from character.py import *
 from player import Player
 from collisionsMap import * 
 from collision import * 
@@ -34,7 +35,6 @@ playerSprite_rect = playerSprite.get_rect()
 playerSprite = pygame.transform.scale(playerSprite, (playerSprite_rect.width*zoomMapLevel, playerSprite_rect.height*zoomMapLevel))
 
 def dialogues():
-    global current_dialogue
     with open('./dialogues.json', 'r') as dialogue:
         data = json.load(dialogue)
 
@@ -431,8 +431,12 @@ def start_fight():
         pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(width/4, height/2-height/5, width/1.5, height/2.88))
         screen.blit(playerSprite, (width/2, height/1.3), (zoomMapLevel, player.frameY*zoomMapLevel, player.width*zoomMapLevel, player.height*zoomMapLevel))
 
-        text_surface = font.render("youhou la baston", True, (0, 0, 0))
+        text = "ton texte"
+        #floor = background.current_floor
+        #adv = background.current_dialogue o | 1 | 2 | 3 |4 |5 |6 |7 | 8 | 9
+        text_surface = font.render(text, True, (0, 0, 0))
         screen.blit(text_surface, (width/4, height/2-height/5))
+        print(list_items_array())
 
         pygame.display.flip()
         time.sleep(2)
