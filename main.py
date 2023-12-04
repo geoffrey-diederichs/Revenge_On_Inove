@@ -175,7 +175,7 @@ def move():
         before_last_key = tmp_key 
 
     if keys[pygame.K_SPACE]:
-        player.sprint = 0.8
+        player.sprint = 1.1
     else:
         player.sprint = 0
 
