@@ -10,7 +10,7 @@ Après avoir hacké Inove, un étudiant est punni par son professeur de réseaux
 
 Déplacement en 2D dans 3 différentes cartes, collision avec des ennemis positionné au préalable pour ouvrir un mode de combat en tour par tour.
 
-## Détails tchniques
+## Détails techniques
 
 ### Mécaniques de combats
 
