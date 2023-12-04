@@ -30,7 +30,7 @@ class Item():
                 return Shell()
             case "inexistent":
                 return Inexistent()
-        return item.Fist()
+        return Fist()
 
 class Fist(Item):
     def __init__(self) -> Item:

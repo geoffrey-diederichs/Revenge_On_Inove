@@ -498,7 +498,7 @@ def start_fight():
                     item = 7
                     select_item = False
 
-        damages = charac.inflict_damages(charac_items[int(item)-1], enemy)
+        damages = charac.inflict_damages(charac_items[int(item)], enemy)
         if damages > 1:
             text = "Tu as infligé "+str(damages)+" dégâts."
         elif damages == 1:

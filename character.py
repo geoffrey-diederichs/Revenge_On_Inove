@@ -48,6 +48,8 @@ class Character:
         return 0
 
     def add_item(self, item_name:str) -> None:
+        if item_name == "":
+            return
         if self.has_item(item_name) == 0:
             self._items.append(item.Item.create(item_name))
     
