@@ -40,8 +40,6 @@ def dialogues():
 
     text = data[current_dialogue]["dialogue"]
 
-    
-
     #draw the white outter line from dialogue
     pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(width-width/1.17, height-height/3.2, width-width/3.4, height-height/1.3))
     #draw the black inner line
@@ -321,28 +319,17 @@ def floor_selection():
     text = ""
     keys2 = pygame.key.get_pressed()
     if background.current_floor == 0:
-        text = ["Quel étage ?", "   > RDC", "     1", "     2"]
+        text = ["Quel étage ?", "   > RDC", "     1"]
         if keys2[pygame.K_2]:
             background.current_floor = 1
             load_map("img/floor1.png")
-        elif keys2[pygame.K_3]:
-            background.current_floor = 2
-            load_map("img/floor2.png")
     elif background.current_floor == 1:
-        text = ["Quel étage ?", "     RDC", "   > 1", "     2"]
-        if keys2[pygame.K_1]:
-            background.current_floor = 0
-            load_map("img/floor0.png")
-        elif keys2[pygame.K_3]:
+        text = ["Quel étage ?", "   > 1", "     2"]
+        if keys2[pygame.K_3]:
             background.current_floor = 2
             load_map("img/floor2.png")
-    elif background.current_floor == 2:
-        text = ["Quel étage ?", "     RDC", "     1", "   > 2"]
-        if keys2[pygame.K_1]:
-            background.current_floor = 0
-            load_map("img/floor0.png")
-        elif keys2[pygame.K_2]:
-            load_map("img/floo11.png")
+    else:
+        return False
 
     text_y_position = width-width/1.28
     pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(width-width/2.95, height-height/1.58, width-width/1.218, height-height/1.22))
@@ -355,7 +342,13 @@ def floor_selection():
         text_y_position += width-width/1.02
 
     font2 = pygame.font.Font("./font/DeterminationMono.ttf", 35)
-    text_select = "1\n2\n3"
+    if background.current_floor == 0:
+        text_select = "1\n2"
+    elif background.current_floor == 1:
+        text_select = "2\n3"
+    else:
+        return False
+    
     selection_text = text_select.split("\n")
     selection_y = height-height/1.75
         
@@ -398,6 +391,8 @@ def skin_selection():
 
 def check_if_elevator_near():
     global near_escalator
+    if background.current_floor == 2:
+        return False
     if player.position_x > -144 and player.position_x < 21 and player.position_y < -200 and player.position_y > -324:
         text_surface = font.render("[e]", True,"yellow") 
         text_rect = (width/2-player.width/2, height/2+height-height/0.98)
