@@ -26,6 +26,7 @@ zoomMapLevel = 4
 bg = ""
 background = Background()
 current_dialogue = 0
+current_enemy = 0
 
 FPS = 144
 
@@ -430,9 +431,8 @@ fight_data = [character.Student(), "coffee", character.Depressed_student(), "rop
 def start_fight():
     fight = True
     text = ""
-    print(current_dialogue)
-    enemy = fight_data[current_dialogue*2]
-    print(enemy)
+    global current_enemy
+    enemy = fight_data[current_enemy*2]
     if enemy.get_name() == "network teacher":
         charac.reset_health()
     elif enemy.get_name() == "mentor" or enemy.get_name() == "mentor 2":
@@ -562,7 +562,8 @@ def start_fight():
         elif (enemy.is_alive() == 0) and (enemy.get_name() == "network manager"):
             won()
         elif enemy.is_alive() == 0:
-            charac.add_item(fight_data[(current_dialogue*2)+1])
+            charac.add_item(fight_data[(current_enemy*2)+1])
+            current_enemy += 1
             fight = False
 
 def lost():
