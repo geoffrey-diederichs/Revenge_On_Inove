@@ -34,7 +34,7 @@ Votre objectif principal est de naviguer à travers les étages de l'école, aff
 
 ## Détails techniques
 
-### Mécaniques de combats
+### I. Mécaniques de combats
 
 #### character.py
 
@@ -48,6 +48,6 @@ Fichier contenant les items utilisés par les personnages. Les items sont unique
 
 Chaque item dispose de sa classe héritant de la classe Item et la méthode create() permet de créer des items avec un mot clé non seulement pour que l'on ait pas à manipuler des objets Item depuis le moteur de jeu.
 
-### - Pygames
+### II. Pygames
 
-### - Cartes
+### III. Cartes
