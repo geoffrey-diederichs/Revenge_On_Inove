@@ -450,10 +450,15 @@ def start_fight():
     screen.blit(text_surface, (width/4, height/2-height/5))
                     
     y_pos = height/13
+    j = 1
     for i in charac_items:
         text_surface = font.render(i, True, (0, 0, 0))
         screen.blit(text_surface, (width//40, y_pos))
-        y_pos+=40
+        select_number = font.render(str(j), True, "yellow")
+        screen.blit(select_number, (width//100, y_pos))
+        y_pos+=height//40
+        j+=1
+
     hp_charac_surface = font.render(charac.health(), True, (40, 150, 10))
     hp_enemy_surface = font.render(enemy.health(), True, "red")
     hp_charac_rect = (width/2, height/1.3)
@@ -536,10 +541,14 @@ def start_fight():
         screen.blit(hp_charac_surface, hp_charac_rect)
         screen.blit(hp_enemy_surface, hp_enemy_rect)
         y_pos = height/13
+        j = 1
         for i in charac_items:
             text_surface = font.render(i, True, (0, 0, 0))
             screen.blit(text_surface, (width//40, y_pos))
-            y_pos+=40
+            select_number = font.render(str(j), True, "yellow")
+            screen.blit(select_number, (width//100, y_pos))
+            y_pos+=height//40
+            j+=1
 
         text_arr = text.split("\n")
 
