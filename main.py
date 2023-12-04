@@ -37,10 +37,10 @@ playerSprite_rect = playerSprite.get_rect()
 playerSprite = pygame.transform.scale(playerSprite, (playerSprite_rect.width*zoomMapLevel, playerSprite_rect.height*zoomMapLevel))
 
 def dialogues():
+    global current_dialogue
     with open('./dialogues.json', 'r') as dialogue:
         data = json.load(dialogue)
 
-    current_dialogue = 1
     text = data[current_dialogue]["dialogue"]
 
     #draw the white outter line from dialogue
@@ -174,7 +174,7 @@ def move():
         before_last_key = tmp_key 
 
     if keys[pygame.K_SPACE]:
-        player.sprint = 0.8
+        player.sprint = 2.8
     else:
         player.sprint = 0
 
@@ -233,7 +233,6 @@ def check_fight(collision):
 def main():
     clock = pygame.time.Clock()
     load_map("img/floor0.png")
-    current_dialogue = 1
     dialogues()
 
     while True:
@@ -455,7 +454,13 @@ def start_fight():
         text_surface = font.render(i, True, (0, 0, 0))
         screen.blit(text_surface, (width//40, y_pos))
         y_pos+=40
+    hp_charac_surface = font.render(charac.health(), True, (40, 150, 10))
+    hp_enemy_surface = font.render(enemy.health(), True, "red")
+    hp_charac_rect = (width/2, height/1.3)
+    hp_enemy_rect = (width/2, height/7)
 
+    screen.blit(hp_charac_surface, hp_charac_rect)
+    screen.blit(hp_enemy_surface, hp_enemy_rect)
     pygame.display.flip()
 
     while fight:
