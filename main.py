@@ -1,4 +1,5 @@
 import pygame
+import json
 from pygame.locals import *
 import gc
 import time
@@ -22,17 +23,25 @@ tileSize = 16
 zoomMapLevel = 4
 bg = ""
 background = Background()
+current_dialogue = 0
 
 FPS = 144
 
 #text = ["on va tester les dialogues", "oui"]
-text = "short\ntext"
 player = Player(width/2, height/2)
 playerSprite = (pygame.image.load(player.imgSrc)).convert_alpha()
 playerSprite_rect = playerSprite.get_rect()
 playerSprite = pygame.transform.scale(playerSprite, (playerSprite_rect.width*zoomMapLevel, playerSprite_rect.height*zoomMapLevel))
 
-def dialogues(text: str):
+def dialogues():
+    global current_dialogue
+    with open('./dialogues.json', 'r') as dialogue:
+        data = json.load(dialogue)
+
+    text = data[current_dialogue]["dialogue"]
+
+    
+
     #draw the white outter line from dialogue
     pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(width-width/1.17, height-height/3.2, width-width/3.4, height-height/1.3))
     #draw the black inner line
@@ -42,18 +51,29 @@ def dialogues(text: str):
 
     text_y_position = width-width/1.67 
     text_x_position = width-width/1.2
+    
+    index = 0
+    text_return = ''
+    for i in text:
+        index +=1
+        if i == ' ' and index >= 40:
+            index = 0
+            text_return += '\n'
+        else:
+            text_return += i
 
-    text_arr = text.split("\n")
+    text_arr = text_return.split("\n")
 
     #allow to have multiple lines of dialogue
     i = 0
     for line in text_arr:
         for char in line:
-            if i == 5:
+            if i == 4:
                 event = pygame.event.wait()
                 if event.type == KEYDOWN:
                     pygame.draw.rect(screen, (0, 0, 0), pygame.Rect(width-width/1.178, height-height/3.31, width-width/3.26, height-height/1.265))
                     text_y_position = width-width/1.67
+                    text_x_position = width-width/1.2
                     i = 0
             text_surface = font.render(char, True, (255, 255, 255))
             text_rect = (text_x_position, text_y_position)
@@ -65,6 +85,7 @@ def dialogues(text: str):
         text_x_position = width-width/1.2
         text_y_position += width-width/1.02
     time.sleep(1)
+    current_dialogue+=1
 
 def info():
     #display all the info at the top of the screen
@@ -140,9 +161,6 @@ def move():
     else:
         pressed_d = False
 
-    if keys[pygame.K_v]:
-        dialogues(text)
-
     if movable:
         player.position_y -= moveY
         player.position_x -= moveX
@@ -205,12 +223,13 @@ def check_fight(collision):
         for i in Collision.allCollisions:
             if i.id == id:
                 i.used = True
-        dialogues(text)
+        dialogues()
         start_fight()
 
 def main():
     clock = pygame.time.Clock()
     load_map("img/floor0.png")
+    dialogues()
 
     while True:
         #load_map()
@@ -299,6 +318,7 @@ def load_map(imgSrc: str):
 
 def floor_selection():
     global font
+    text = ""
     keys2 = pygame.key.get_pressed()
     if background.current_floor == 0:
         text = ["Quel étage ?", "   > RDC", "     1", "     2"]
@@ -401,7 +421,7 @@ def start_fight():
         pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(width/4, height/2-height/5, width/1.5, height/2.88))
         screen.blit(playerSprite, (width/2, height/1.3), (zoomMapLevel, player.frameY*zoomMapLevel, player.width*zoomMapLevel, player.height*zoomMapLevel))
 
-        text_surface = font.render(text, True, (0, 0, 0))
+        text_surface = font.render("youhou la baston", True, (0, 0, 0))
         screen.blit(text_surface, (width/4, height/2-height/5))
 
         pygame.display.flip()
