@@ -35,7 +35,7 @@ Votre objectif principal est de naviguer à travers les étages de l'école, aff
 
 ## Utilisation
 
-Tout d'abord vous devez avoir python3. Ensuite pour jouer au jeu, clonez ce projet, allez dans le dossier Code/. Vous pouvez installez les modules nécessaires puis exécuter le jeu :
+Tout d'abord vous devez avoir python3. Ensuite pour jouer au jeu, clonez ce projet, allez dans le dossier Code/. Vous pouvez installer les modules nécessaires puis exécuter le jeu :
 
 ```bash
 $ pip install -r requirements.txt
