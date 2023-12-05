@@ -94,6 +94,6 @@ Fichier contenant des tableaux de valeurs créées lorsque nous exportons la cou
 
 Les caractères spéciaux utilisés dans les dialogue etc, s'affichent parfaitement sous Linux mais bug sous Windows.
 
-### Déplacement diagonal
+### Déplacement diagonale
 
-Les déplacement en diagonals (par exemple flèche du haut + flèche gauche) fonctionne parfaitement sous Linux mais pas sous Windows.
+Les déplacement en diagonale (par exemple flèche du haut + flèche gauche) fonctionne parfaitement sous Linux mais pas sous Windows.
