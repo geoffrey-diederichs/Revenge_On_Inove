@@ -12,11 +12,12 @@ Votre objectif principal est de naviguer à travers les étages de l'école, aff
 ### Contrôles
 - Utilisez les touches directionnelles pour vous déplacer dans le bâtiment et interargir avec les menus.
 - Appuyez sur la touche d'espace pour courir.
-- Utiliser la touche e pour interagir
+- Utiliser la touche e pour interagir.
+- Appuyez sur les chiffres 1-9 pour sélectionner un item ou utiliser l'ascenseur.
 
 ### Déroulement du jeu
 1. **Début:**
-   - Lancer le jeu en exécutant le fichier principal `main.py`.
+   - Lancer le jeu [en suivant cette démarche](##utilisation).
 
 2. **Exploration des étages:**
    - Parcourez chaque étage du bâtiment en évitant les ennemis et en cherchant des indices pour progresser.
