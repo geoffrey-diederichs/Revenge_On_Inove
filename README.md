@@ -35,7 +35,15 @@ Votre objectif principal est de naviguer à travers les étages de l'école, aff
 
 ## Utilisation
 
-Tout d'abord vous devez avoir python3. Ensuite pour jouer au jeu, clonez ce projet, allez dans le dossier Code/. Vous pouvez installer les modules nécessaires puis exécuter le jeu :
+Tout d'abord vous devez avoir python3. Ensuite pour jouer au jeu, clonez ce projet et allez dans le dossier Code/ :
+
+```bash
+$ git clone git@github.com:geoffrey-diederichs/Revenge_On_Inove.git
+
+$ cd Revenge_On_Inove/Code/
+```
+
+Vous pouvez installer les modules nécessaires puis exécuter le jeu :
 
 ```bash
 $ pip install -r requirements.txt
@@ -46,10 +54,6 @@ $ python3 main.go
 Ou bien utiliser un environnement virtuel. Exemple des commandes à exécuter sous Linux :
 
 ```bash
-$ git clone git@github.com:geoffrey-diederichs/Revenge_On_Inove.git
-
-$ cd Revenge_On_Inove/Code/
-
 $ python3 -m venv env
 
 $ source env/bin/activate
