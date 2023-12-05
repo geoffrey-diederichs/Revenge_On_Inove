@@ -17,7 +17,7 @@ Votre objectif principal est de naviguer à travers les étages de l'école, aff
 
 ### Déroulement du jeu
 1. **Début:**
-   - Lancer le jeu [en suivant cette démarche](##utilisation).
+   - Lancer le jeu [en suivant cette démarche](#utilisation).
 
 2. **Exploration des étages:**
    - Parcourez chaque étage du bâtiment en évitant les ennemis et en cherchant des indices pour progresser.
