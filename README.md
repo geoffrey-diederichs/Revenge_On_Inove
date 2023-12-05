@@ -4,7 +4,7 @@ BEL Alexandre, DIEDERICHS Geoffrey, HANSON Lucas
 
 Bienvenue dans Revenge On Inove, un jeu d'aventure développé en Python avec Pygame. Dans ce jeu, vous incarnez un étudiant astucieux qui a décidé de hacker son école. Cependant, cette action a rendu tous les étudiants, professeurs, mentors et membres de l'administration furieux contre vous. Pour regagner le contrôle, vous devez vous aventurer dans chaque étage du bâtiment et affronter vos adversaires.
 
-## Instructions
+## Instruction
 
 ### Objectif
 Votre objectif principal est de naviguer à travers les étages de l'école, affronter des adversaires et progresser jusqu'à la victoire finale.
@@ -31,6 +31,24 @@ Votre objectif principal est de naviguer à travers les étages de l'école, aff
 
 5. **Répétez le processus:**
    - Répétez l'exploration, les combats et l'utilisation de l'ascenseur jusqu'à ce que vous ayez conquis tous les étages de l'école.
+
+## Utilisation
+
+Tout d'abord vous devez avoir python3. Ensuite pour jouer au jeu, clonez ce projet, allez dans le dossier Code/. Vous pouvez installez le module nécessaire pygame puis exécuter `python3 main.go`, ou bien utiliser l'environnement virtuel. Exemple des commandes à exécuter sous Linux :
+
+```bash
+$ git clone git@github.com:geoffrey-diederichs/Revenge_On_Inove.git
+
+$ cd Revenge_On_Inove/Code/
+
+$ source .env/bin/activate
+
+$ pip install -r requirements.txt
+
+$ python3 main.go
+
+$ deactivate
+```
 
 ## Détails techniques
 
@@ -60,4 +78,12 @@ Images des maps de chaque étage créées en utilisant l'outil Tiled. Ces cartes
 
 Fichier contenant des tableaux de valeurs créées lorsque nous exportons la couche collisions des images. Ce fichier nous permet de savoir l'id de chaque pixel dans l'image, et donc de savoir si nous avons le droit de nous déplacer ou pas.
 
+## Axes d'améliorations
 
+### Bug d'affichage sous Windows
+
+Les caractères spéciaux utilisés dans les dialogue etc, s'affichent parfaitement sous Linux mais bug sous Windows.
+
+### Déplacement diagonal
+
+Les déplacement en diagonals (par exemple flèche du haut + flèche gauche) fonctionne parfaitement sous Linux mais pas sous Windows.
