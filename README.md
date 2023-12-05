@@ -20,7 +20,7 @@ Votre objectif principal est de naviguer à travers les étages de l'école, aff
    - Lancer le jeu [en suivant cette démarche](#utilisation).
 
 2. **Exploration des étages:**
-   - Parcourez chaque étage du bâtiment en évitant les ennemis et en cherchant des indices pour progresser.
+   - Parcourez chaque étage du bâtiment et affrontez les ennemis pour progresser.
 
 3. **Affrontements épiques:**
    - Lorsque vous rencontrez un étudiant, un professeur, un mentor ou un membre de l'administration, le jeu bascule en mode combat.
