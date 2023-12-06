@@ -83,6 +83,40 @@ Chaque item dispose de sa classe héritant de la classe Item et la méthode crea
 
 ### II. Pygames
 
+#### backgrond.py
+
+Fichier contenant les positions, l'ofset ainsi que la map actuelle 
+
+#### collision.py
+
+Fichier contenant les instances de toutes les collisions dans Collision.allCollision ainsi que leurs positions leurs taille et leurs id.
+Les collisions qui sont = à 126 sont des collisions de bases qu'on ne peut pas franchir les autres sont des collisions qui peuvent trigger des evenements.
+
+#### player.py
+
+Fichier contenant la classe player, sa taille, sa position, son image..., ainsi que sa methode pour animer le personnage.
+
+#### save.json
+
+Fichier contenant tous les dialogues du jeu
+
+#### main.py 
+
+Fichier principal du jeu composé de plusieurs fonctions.
+    Initialisation : La bibliothèque Pygame est initialisée, et les modules nécessaires sont importés.
+
+    Constantes et variables : Diverses constantes et variables sont définies, telles que les dimensions de l'écran, la taille des tuiles, le niveau de zoom, le personnage du joueur et l'arrière-plan.
+
+    Fonctions :
+        dialogues(): Affiche des dialogues à l'écran.
+        info(): Affiche des informations en haut de l'écran.
+        move(): Gère le mouvement du joueur et les collisions.
+        check_collisions(): Vérifie les collisions entre le joueur et l'environnement.
+        check_fight(): Lance un combat si le joueur rencontre un ennemi.
+        main(): La boucle principale du jeu qui met à jour l'affichage et gère les événements.
+
+Le code semble être axé sur la création d'un jeu avec des fonctionnalités de mouvement du joueur, d'interactions avec l'environnement, de dialogues et de combats.
+
 ### III. Cartes
 
 #### floor*.png
