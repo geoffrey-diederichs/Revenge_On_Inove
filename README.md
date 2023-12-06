@@ -115,8 +115,6 @@ Fichier principal du jeu composé de plusieurs fonctions.
         check_fight(): Lance un combat si le joueur rencontre un ennemi.
         main(): La boucle principale du jeu qui met à jour l'affichage et gère les événements.
 
-Le code semble être axé sur la création d'un jeu avec des fonctionnalités de mouvement du joueur, d'interactions avec l'environnement, de dialogues et de combats.
-
 ### III. Cartes
 
 #### floor*.png
