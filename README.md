@@ -85,7 +85,7 @@ Chaque item dispose de sa classe héritant de la classe Item et la méthode crea
 
 #### backgrond.py
 
-Fichier contenant les positions, l'ofset ainsi que la map actuelle 
+Fichier contenant les positions, l'offset ainsi que la map actuelle 
 
 #### collision.py
 
